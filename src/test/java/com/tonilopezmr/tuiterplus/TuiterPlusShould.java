@@ -12,7 +12,7 @@ public class TuiterPlusShould {
 
   @Test
   public void
-  show_greeting_example(){
+  show_greeting_example() {
     ByteArrayOutputStream output = new ByteArrayOutputStream();
     System.setOut(new PrintStream(output));
 
