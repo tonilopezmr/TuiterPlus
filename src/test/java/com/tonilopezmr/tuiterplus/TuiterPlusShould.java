@@ -119,6 +119,26 @@ public class TuiterPlusShould {
 
     String output = getOutput(1);
     assertThat(output, is("Hey Alvaro have a look my repo (a moment ago)"));
+    output = getOutput(2);
+    assertThat(output, is("Hello Codurance! (2 minutes ago)"));
+  }
+
+  @Test
+  public void
+  not_show_anything_when_user_follows_another() {
+    User toni = new User("Toni");
+    User alvaro = new User("Alvaro");
+    ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
+        .scanner(willTypeLine("Toni follows Alvaro\nexit"))
+        .printStream(recordOutPut())
+        .userRepository(new MockUserRepository(Arrays.asList(toni, alvaro)))
+        .build();
+    TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
+
+    tuiterPlus.run();
+
+    String output = getOutput(1);
+    assertThat(output, is(""));
   }
 
 }

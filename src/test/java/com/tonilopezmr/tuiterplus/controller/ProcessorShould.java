@@ -2,6 +2,7 @@ package com.tonilopezmr.tuiterplus.controller;
 
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.usercases.CreatePost;
+import com.tonilopezmr.tuiterplus.usercases.FollowUser;
 import com.tonilopezmr.tuiterplus.usercases.GetWallTimeline;
 import org.junit.Test;
 
@@ -14,9 +15,9 @@ public class ProcessorShould {
 
   @Test
   public void
-  get_user_and_post_arguments_after_post() {
+  get_user_and_post_arguments_when_post() {
     MockCreatePost mockCreatePost = new MockCreatePost();  //To intercept arguments
-    Processor processor = new Processor(null, mockCreatePost, null);
+    Processor processor = new Processor(null, mockCreatePost, null, null);
 
     processor.process("Toni -> Hello Codurance!");
 
@@ -27,11 +28,23 @@ public class ProcessorShould {
   @Test public void
   get_user_argument_when_get_wall(){
     MockGetWall mockGetWall = new MockGetWall();
-    Processor processor = new Processor(null, null, mockGetWall);
+    Processor processor = new Processor(null, null, mockGetWall, null);
 
     processor.process("Toni wall");
 
     assertThat(mockGetWall.getUserNameArg(), is("Toni"));
+  }
+
+  @Test
+  public void
+  get_follower_and_followed_arguments_when_user_follows() {
+    MockFollowUser mockFollowUser = new MockFollowUser();
+    Processor processor = new Processor(null, null, null, mockFollowUser);
+
+    processor.process("Toni follow Rodrigo");
+
+    assertThat(mockFollowUser.getFollower(), is("Toni"));
+    assertThat(mockFollowUser.getFollowed(), is("Rodrigo"));
   }
 
   private class MockCreatePost extends CreatePost {
@@ -74,6 +87,30 @@ public class ProcessorShould {
 
     String getUserNameArg() {
       return this.userName;
+    }
+  }
+
+  private class MockFollowUser extends FollowUser {
+
+    private String follower;
+    private String followed;
+
+    public MockFollowUser() {
+      super(null);
+    }
+
+    @Override
+    public void doIt(String follower, String followed) {
+      this.follower = follower;
+      this.followed = followed;
+    }
+
+    public String getFollower() {
+      return follower;
+    }
+
+    public String getFollowed() {
+      return followed;
     }
   }
 }
