@@ -5,8 +5,6 @@ import com.tonilopezmr.tuiterplus.model.Post;
 import java.io.PrintStream;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
