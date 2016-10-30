@@ -6,6 +6,8 @@ import com.tonilopezmr.tuiterplus.model.Post;
 import com.tonilopezmr.tuiterplus.model.User;
 import com.tonilopezmr.tuiterplus.view.ConsoleCLI;
 import com.tonilopezmr.tuiterplus.view.View;
+import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
+import com.tonilopezmr.tuiterplus.view.dateformatter.MinutesFormat;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -22,8 +24,14 @@ public class TuiterPlusShould {
 
   private ByteArrayOutputStream out = new ByteArrayOutputStream();
 
+  private DateFormatter getDateFormatter() {
+    DateFormatter dateFormatter = new DateFormatter();
+    dateFormatter.addDateFormat(new MinutesFormat("minute", "minutes"));
+    return dateFormatter;
+  }
+
   private View willTypeLine(String line) {
-    return new ConsoleCLI(new Scanner(line), new PrintStream(out));
+    return new ConsoleCLI(new Scanner(line), new PrintStream(out), getDateFormatter());
   }
 
   private TuiterPlus giveTuiterPlus(View view) {
