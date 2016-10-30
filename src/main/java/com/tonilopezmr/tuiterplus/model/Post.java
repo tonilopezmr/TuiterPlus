@@ -1,15 +1,17 @@
 package com.tonilopezmr.tuiterplus.model;
 
+import java.time.LocalDateTime;
+
 public class Post {
 
   private User user;
   private String post;
-  private Long timestamp;
+  private LocalDateTime dateTime;
 
-  public Post(User user, String post, Long timestamp) {
+  public Post(User user, String post, LocalDateTime dateTime) {
     this.user = user;
     this.post = post;
-    this.timestamp = timestamp;
+    this.dateTime = dateTime;
   }
 
   public User getUser() {
@@ -20,8 +22,8 @@ public class Post {
     return post;
   }
 
-  public Long getTimestamp() {
-    return timestamp;
+  public LocalDateTime getDateTime() {
+    return dateTime;
   }
 
 }

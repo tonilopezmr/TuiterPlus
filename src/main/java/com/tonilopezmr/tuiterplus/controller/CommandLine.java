@@ -1,6 +1,11 @@
 package com.tonilopezmr.tuiterplus.controller;
 
+import com.tonilopezmr.tuiterplus.model.Post;
+import com.tonilopezmr.tuiterplus.model.User;
 import com.tonilopezmr.tuiterplus.view.View;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
 
 public class CommandLine {
 
@@ -25,7 +30,8 @@ public class CommandLine {
       return;
     }
 
-    view.show("Hello Codurance! (2 minutes ago)\n");
+    view.show(Arrays.asList(new Post(new User("Toni"), "Hello Codurance!", LocalDateTime.now().minusMinutes(2))));
+//    view.show("Hello Codurance! (2 minutes ago)\n");
   }
 
   public boolean isExit() {
