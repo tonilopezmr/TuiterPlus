@@ -2,14 +2,14 @@ package com.tonilopezmr.tuiterplus;
 
 import com.tonilopezmr.tuiterplus.model.post.PostRepository;
 import com.tonilopezmr.tuiterplus.model.user.UserRepository;
-import com.tonilopezmr.tuiterplus.usercases.CreatePost;
-import com.tonilopezmr.tuiterplus.usercases.GetWallTimeline;
 
 import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
  * Mock Service Locator to allow replace the dependencies.
+ *
+ * Very helpful to mock in high level tests.
  */
 public class MockServiceLocatorBuilder {
 
@@ -17,8 +17,6 @@ public class MockServiceLocatorBuilder {
   private PrintStream printStream;
   private PostRepository postRepository;
   private UserRepository userRepository;
-  private CreatePost createPost;
-  private GetWallTimeline getWallTimeline;
 
   public MockServiceLocatorBuilder scanner(Scanner scanner) {
     this.scanner = scanner;
@@ -39,17 +37,6 @@ public class MockServiceLocatorBuilder {
     this.userRepository = userRepository;
     return this;
   }
-
-  public MockServiceLocatorBuilder createPost(CreatePost createPost) {
-    this.createPost = createPost;
-    return this;
-  }
-
-  public MockServiceLocatorBuilder getWall(GetWallTimeline getWallTimeline) {
-    this.getWallTimeline = getWallTimeline;
-    return this;
-  }
-
 
   public ServiceLocator build() {
     return new ServiceLocator() {
@@ -73,15 +60,6 @@ public class MockServiceLocatorBuilder {
         return userRepository != null? userRepository : super.getUserRepository();
       }
 
-      @Override
-      public CreatePost getCreatePostUseCase() {
-        return createPost != null? createPost : super.getCreatePostUseCase();
-      }
-
-      @Override
-      public GetWallTimeline getWallTimeline() {
-        return getWallTimeline != null? getWallTimeline : super.getWallTimeline();
-      }
     };
   }
 }

@@ -16,14 +16,18 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GetPostsShould {
 
-  @Test
-  public void
-  return_posts_when_the_command_is_a_user(){
+  private PostRepository getToniPosts() {
     User toni = new User("Toni");
     Post post = new Post(toni, "Hello Codurance!", LocalDateTime.now());
     Post post1 = new Post(toni, "Tomorrow I have a Software Engineer exam :(", LocalDateTime.now().minusMinutes(30));
 
-    PostRepository postRepository = new MockPostRepository(Arrays.asList(post1, post));
+    return new MockPostRepository(Arrays.asList(post1, post));
+  }
+
+  @Test
+  public void
+  return_posts_when_the_command_is_a_user(){
+    PostRepository postRepository = getToniPosts();
     GetPosts getPosts = new GetPosts(postRepository);
 
     List<Post> posts = getPosts.getIt("Toni");

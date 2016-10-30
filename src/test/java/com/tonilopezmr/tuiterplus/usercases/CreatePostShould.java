@@ -1,8 +1,5 @@
 package com.tonilopezmr.tuiterplus.usercases;
 
-import com.tonilopezmr.tuiterplus.MockServiceLocatorBuilder;
-import com.tonilopezmr.tuiterplus.ServiceLocator;
-import com.tonilopezmr.tuiterplus.controller.Processor;
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.repository.InMemoryPosts;
@@ -22,10 +19,7 @@ public class CreatePostShould {
   public void
   create_user_when_does_not_exist() {
     InMemoryUsers inMemoryUsers = new InMemoryUsers();    //To track the new user
-    ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
-        .userRepository(inMemoryUsers)
-        .build();
-    CreatePost createPost = serviceLocator.getCreatePostUseCase();
+    CreatePost createPost = new CreatePost(inMemoryUsers, new InMemoryPosts());
 
     createPost.doIt("Toni", "Hello Codurance!");
 
@@ -38,15 +32,12 @@ public class CreatePostShould {
   public void
   create_post() {
     InMemoryPosts postRepository = new InMemoryPosts();
-    ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
-        .postRepository(postRepository)
-        .build();
-    Processor processor = serviceLocator.getProcessor();
+    CreatePost createPost = new CreatePost(new InMemoryUsers(), postRepository);
 
-    processor.process("Toni -> Hello Codurance!");
+    createPost.doIt("Toni", "Hello Codurance!");
 
     List<Post> posts = postRepository.getPostsBy(new User("Toni"));
-    assertTrue(posts.size() > 0);
+    assertTrue(!posts.isEmpty());
     assertThat(posts.get(0).getPost(), is("Hello Codurance!"));
   }
 }

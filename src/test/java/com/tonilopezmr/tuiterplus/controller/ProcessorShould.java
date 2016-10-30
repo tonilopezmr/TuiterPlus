@@ -1,7 +1,5 @@
 package com.tonilopezmr.tuiterplus.controller;
 
-import com.tonilopezmr.tuiterplus.MockServiceLocatorBuilder;
-import com.tonilopezmr.tuiterplus.ServiceLocator;
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.usercases.CreatePost;
 import com.tonilopezmr.tuiterplus.usercases.GetWallTimeline;
@@ -18,10 +16,7 @@ public class ProcessorShould {
   public void
   get_user_and_post_arguments_after_post() {
     MockCreatePost mockCreatePost = new MockCreatePost();  //To intercept arguments
-    ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
-        .createPost(mockCreatePost)
-        .build();
-    Processor processor = serviceLocator.getProcessor();
+    Processor processor = new Processor(null, mockCreatePost, null);
 
     processor.process("Toni -> Hello Codurance!");
 
@@ -32,10 +27,7 @@ public class ProcessorShould {
   @Test public void
   get_user_argument_when_get_wall(){
     MockGetWall mockGetWall = new MockGetWall();
-    ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
-        .getWall(mockGetWall)
-        .build();
-    Processor processor = serviceLocator.getProcessor();
+    Processor processor = new Processor(null, null, mockGetWall);
 
     processor.process("Toni wall");
 
@@ -47,7 +39,7 @@ public class ProcessorShould {
     private String userName;
     private String post;
 
-    public MockCreatePost() {
+    MockCreatePost() {
       super(null, null);
     }
 
@@ -57,11 +49,11 @@ public class ProcessorShould {
       this.post = post;
     }
 
-    public String getUserNameArg() {
+    String getUserNameArg() {
       return userName;
     }
 
-    public String getPostArg() {
+    String getPostArg() {
       return post;
     }
   }
@@ -70,7 +62,7 @@ public class ProcessorShould {
 
     private String userName;
 
-    public MockGetWall() {
+    MockGetWall() {
       super(null, null);
     }
 
@@ -80,7 +72,7 @@ public class ProcessorShould {
       return null;
     }
 
-    public String getUserNameArg() {
+    String getUserNameArg() {
       return this.userName;
     }
   }
