@@ -2,11 +2,23 @@ package com.tonilopezmr.tuiterplus.view.dateformatter;
 
 import java.time.Duration;
 
+/**
+ * DateFormat is a class to format DateTime to String,
+ * sometimes in some cases needs plural singular differentiate.
+ *
+ * For example:
+ *      - plural: 46 seconds
+ *      - singular: 1 second (or a second)
+ *
+ *      - plural: 2 days
+ *      - singular: yesterday
+ *
+ */
 public abstract class DateFormat implements Comparable<DateFormat> {
 
   private Long dateInSeconds;
-  protected String singular;
-  protected String plural;
+  private String singular;
+  private String plural;
 
   public DateFormat(long dateInSeconds, String format) {
     this.dateInSeconds = dateInSeconds;
@@ -24,10 +36,10 @@ public abstract class DateFormat implements Comparable<DateFormat> {
     return count==1 ? singular : plural;
   }
 
-  protected String format(long duration) {
+  String format(long duration) {
     String output = singlePlural((int) duration, singular, plural);
 
-    return duration > 0? String.format("%d %s", duration, output) : "";
+    return duration > 0? String.format(output, duration) : "";
   }
 
   @Override

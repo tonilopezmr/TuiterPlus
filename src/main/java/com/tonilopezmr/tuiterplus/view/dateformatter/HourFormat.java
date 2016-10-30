@@ -1,12 +1,13 @@
 package com.tonilopezmr.tuiterplus.view.dateformatter;
 
+
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
 public class HourFormat extends DateFormat {
 
-  public HourFormat(String seconds) {
-    super(ChronoUnit.HOURS.getDuration().getSeconds(), seconds);
+  public HourFormat(String format) {
+    super(ChronoUnit.HOURS.getDuration().getSeconds(), format);
   }
 
   public HourFormat(String singular, String plural) {

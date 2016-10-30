@@ -9,6 +9,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Console View, show with console format and collect user commands.
+ */
 public class ConsoleCLI implements View {
 
   private Scanner scanner;
