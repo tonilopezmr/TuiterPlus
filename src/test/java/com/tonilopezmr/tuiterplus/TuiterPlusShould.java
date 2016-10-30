@@ -4,6 +4,7 @@ import com.tonilopezmr.tuiterplus.controller.CommandLine;
 import com.tonilopezmr.tuiterplus.controller.Processor;
 import com.tonilopezmr.tuiterplus.model.Post;
 import com.tonilopezmr.tuiterplus.model.User;
+import com.tonilopezmr.tuiterplus.usercases.GetPosts;
 import com.tonilopezmr.tuiterplus.view.ConsoleCLI;
 import com.tonilopezmr.tuiterplus.view.View;
 import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
@@ -35,13 +36,13 @@ public class TuiterPlusShould {
   }
 
   private TuiterPlus giveTuiterPlus(View view) {
-    Processor processor = new Processor();
+    Processor processor = new Processor(new GetPosts());
     CommandLine commandLine = new CommandLine(view, processor);
     return new TuiterPlus(commandLine);
   }
 
   private Processor giveProcessor(List<Post> timeline) {
-    return new Processor() {
+    return new Processor(null) {
       @Override
       public List<Post> process(String cmd) {
         return timeline;

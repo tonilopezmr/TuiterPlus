@@ -1,7 +1,6 @@
 package com.tonilopezmr.tuiterplus.controller;
 
 import com.tonilopezmr.tuiterplus.model.Post;
-import com.tonilopezmr.tuiterplus.model.User;
 import com.tonilopezmr.tuiterplus.usercases.GetPosts;
 
 import java.util.ArrayList;
@@ -18,6 +17,12 @@ public class Processor {
   public static final String FOLLOW = "(.*) follow (.*)";
   public static final String WALL = "(.*) wall";
 
+  private GetPosts getPosts;
+
+  public Processor(GetPosts getPosts) {
+    this.getPosts = getPosts;
+  }
+
   public List<Post> process(String cmd) {
     List<Post> posts = new ArrayList<>();
 
@@ -30,8 +35,7 @@ public class Processor {
     }else if ((matcher = getMatcher(WALL, cmd)).matches()) {
 
     }else {
-      GetPosts getPosts = new GetPosts();
-      posts = getPosts.getPosts(new User(cmd));
+      posts = getPosts.getPosts(cmd);
     }
 
     return posts;
