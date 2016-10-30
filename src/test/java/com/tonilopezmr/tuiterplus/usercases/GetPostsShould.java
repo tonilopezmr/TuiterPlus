@@ -1,8 +1,7 @@
 package com.tonilopezmr.tuiterplus.usercases;
 
-import com.tonilopezmr.tuiterplus.MockServiceLocatorBuilder;
-import com.tonilopezmr.tuiterplus.ServiceLocator;
 import com.tonilopezmr.tuiterplus.model.post.Post;
+import com.tonilopezmr.tuiterplus.model.post.PostRepository;
 import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.repository.MockPostRepository;
 import org.junit.Test;
@@ -22,16 +21,16 @@ public class GetPostsShould {
   return_posts_when_the_command_is_a_user(){
     User toni = new User("Toni");
     Post post = new Post(toni, "Hello Codurance!", LocalDateTime.now());
+    Post post1 = new Post(toni, "Tomorrow I have a Software Engineer exam :(", LocalDateTime.now().minusMinutes(30));
 
-    ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
-        .postRepository(new MockPostRepository(Arrays.asList(post)))
-        .build();
-    GetPosts getPosts = serviceLocator.getPostsUseCase();
+    PostRepository postRepository = new MockPostRepository(Arrays.asList(post1, post));
+    GetPosts getPosts = new GetPosts(postRepository);
 
     List<Post> posts = getPosts.getIt("Toni");
 
-    assertTrue(posts.size() > 0);
+    assertTrue(!posts.isEmpty());
     assertThat(posts.get(0).getPost(), is("Hello Codurance!"));
+    assertThat(posts.get(1).getPost(), is("Tomorrow I have a Software Engineer exam :("));
   }
 
 }

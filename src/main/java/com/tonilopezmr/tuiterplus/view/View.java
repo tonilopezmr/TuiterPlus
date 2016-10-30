@@ -11,7 +11,7 @@ public interface View {
 
   void showPrompt();
   String readCommandLine();
-  void show(String message);
+  void showFareWell();
   void show(List<Post> posts);
 
 }

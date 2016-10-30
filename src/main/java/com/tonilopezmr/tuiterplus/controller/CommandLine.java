@@ -28,7 +28,7 @@ public class CommandLine {
 
   private void process(String cmd) {
     if (cmd.equals("exit")) {
-      view.show("exit");
+      view.showFareWell();
       exit = true;
       return;
     }

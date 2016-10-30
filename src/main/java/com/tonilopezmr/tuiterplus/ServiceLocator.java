@@ -8,6 +8,7 @@ import com.tonilopezmr.tuiterplus.repository.InMemoryPosts;
 import com.tonilopezmr.tuiterplus.repository.InMemoryUsers;
 import com.tonilopezmr.tuiterplus.usercases.CreatePost;
 import com.tonilopezmr.tuiterplus.usercases.GetPosts;
+import com.tonilopezmr.tuiterplus.usercases.GetWallTimeline;
 import com.tonilopezmr.tuiterplus.view.ConsoleCLI;
 import com.tonilopezmr.tuiterplus.view.View;
 import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
@@ -27,6 +28,8 @@ import java.util.Scanner;
 public class ServiceLocator {
 
   private static ServiceLocator injector;
+  private PostRepository postRepository;
+  private UserRepository userRepository;
 
   public static void load(ServiceLocator serviceLocator) {
     injector = serviceLocator;
@@ -58,11 +61,15 @@ public class ServiceLocator {
   }
 
   public PostRepository getPostRepository() {
-    return new InMemoryPosts();
+    if (postRepository == null) postRepository = new InMemoryPosts();
+
+    return postRepository;
   }
 
   public UserRepository getUserRepository() {
-    return new InMemoryUsers();
+    if (userRepository == null) userRepository = new InMemoryUsers();
+
+    return userRepository;
   }
 
   public CreatePost getCreatePostUseCase() {
@@ -73,8 +80,12 @@ public class ServiceLocator {
     return new GetPosts(getPostRepository());
   }
 
+  public GetWallTimeline getWallTimeline() {
+    return new GetWallTimeline(getUserRepository(), getPostRepository());
+  }
+
   public Processor getProcessor() {
-    return new Processor(getPostsUseCase(), getCreatePostUseCase());
+    return new Processor(getPostsUseCase(), getCreatePostUseCase(), getWallTimeline());
   }
 
   public CommandLine getCommandLine() {

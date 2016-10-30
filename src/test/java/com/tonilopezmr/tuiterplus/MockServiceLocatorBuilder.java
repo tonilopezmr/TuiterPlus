@@ -3,6 +3,7 @@ package com.tonilopezmr.tuiterplus;
 import com.tonilopezmr.tuiterplus.model.post.PostRepository;
 import com.tonilopezmr.tuiterplus.model.user.UserRepository;
 import com.tonilopezmr.tuiterplus.usercases.CreatePost;
+import com.tonilopezmr.tuiterplus.usercases.GetWallTimeline;
 
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -17,6 +18,7 @@ public class MockServiceLocatorBuilder {
   private PostRepository postRepository;
   private UserRepository userRepository;
   private CreatePost createPost;
+  private GetWallTimeline getWallTimeline;
 
   public MockServiceLocatorBuilder scanner(Scanner scanner) {
     this.scanner = scanner;
@@ -43,6 +45,12 @@ public class MockServiceLocatorBuilder {
     return this;
   }
 
+  public MockServiceLocatorBuilder getWall(GetWallTimeline getWallTimeline) {
+    this.getWallTimeline = getWallTimeline;
+    return this;
+  }
+
+
   public ServiceLocator build() {
     return new ServiceLocator() {
       @Override
@@ -68,6 +76,11 @@ public class MockServiceLocatorBuilder {
       @Override
       public CreatePost getCreatePostUseCase() {
         return createPost != null? createPost : super.getCreatePostUseCase();
+      }
+
+      @Override
+      public GetWallTimeline getWallTimeline() {
+        return getWallTimeline != null? getWallTimeline : super.getWallTimeline();
       }
     };
   }

@@ -29,6 +29,6 @@ public class CreatePost {
       user = oUser.get();
     }
 
-    postRepository.create(new Post(user, post, LocalDateTime.now()));
+    postRepository.create(new Post(user, post, LocalDateTime.now().minusSeconds(1)));
   }
 }

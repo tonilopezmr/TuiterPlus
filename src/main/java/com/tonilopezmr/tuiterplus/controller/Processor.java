@@ -3,6 +3,7 @@ package com.tonilopezmr.tuiterplus.controller;
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.usercases.CreatePost;
 import com.tonilopezmr.tuiterplus.usercases.GetPosts;
+import com.tonilopezmr.tuiterplus.usercases.GetWallTimeline;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +21,12 @@ public class Processor {
 
   private GetPosts getPosts;
   private CreatePost createPost;
+  private GetWallTimeline wallTimeline;
 
-  public Processor(GetPosts getPosts, CreatePost createPost) {
+  public Processor(GetPosts getPosts, CreatePost createPost, GetWallTimeline wallTimeline) {
     this.getPosts = getPosts;
     this.createPost = createPost;
+    this.wallTimeline = wallTimeline;
   }
 
   public List<Post> process(String cmd) {
@@ -36,7 +39,7 @@ public class Processor {
     }else if ((matcher = getMatcher(FOLLOW, cmd)).matches()){
 
     }else if ((matcher = getMatcher(WALL, cmd)).matches()) {
-
+      posts = wallTimeline.getIt(matcher.group(1));
     }else {
       posts = getPosts.getIt(cmd);
     }

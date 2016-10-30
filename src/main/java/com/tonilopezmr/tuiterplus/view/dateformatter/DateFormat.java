@@ -40,6 +40,7 @@ public abstract class DateFormat implements Comparable<DateFormat> {
   }
 
   String format(long duration) {
+    duration = Math.abs(duration);
     String output = singlePlural((int) duration, singular, plural);
 
     return duration > 0? String.format(output, duration) : "";

@@ -4,7 +4,7 @@ import com.tonilopezmr.tuiterplus.model.user.User;
 
 import java.time.LocalDateTime;
 
-public class Post {
+public class Post implements Comparable<Post> {
 
   private User user;
   private String post;
@@ -26,6 +26,11 @@ public class Post {
 
   public LocalDateTime getDateTime() {
     return dateTime;
+  }
+
+  @Override
+  public int compareTo(Post o) {
+    return o.dateTime.compareTo(dateTime);
   }
 
 }

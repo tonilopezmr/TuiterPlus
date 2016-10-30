@@ -32,6 +32,11 @@ public class ConsoleCLI implements View {
     return scanner.nextLine();
   }
 
+  @Override
+  public void showFareWell() {
+    show("exit");
+  }
+
   public void show(String message) {
     output.print(message);
   }
@@ -45,7 +50,7 @@ public class ConsoleCLI implements View {
 
       String result = dateFormatter.format(duration);
 
-      output.print(output.printf(post.getPost() + " (%s ago)\n", result));
+      output.printf(post.getPost() + " (%s ago)\n", result);
     }
   }
 

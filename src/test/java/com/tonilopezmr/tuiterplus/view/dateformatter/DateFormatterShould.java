@@ -74,7 +74,7 @@ public class DateFormatterShould {
   @Test public void
   return_difference_in_seconds_format_when_is_singular(){
     LocalDateTime now = LocalDateTime.now();
-    LocalDateTime after = now.minusSeconds(1);
+    LocalDateTime after = LocalDateTime.now();
     Duration duration = Duration.between(after, now);
 
     DateFormatter dateFormatter = getDateFormatter();
