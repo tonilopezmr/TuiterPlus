@@ -14,8 +14,8 @@ public class DateFormatterShould {
     DateFormatter dateFormatter = new DateFormatter();
     dateFormatter.addDateFormat(new HourFormat("an hour", "%d hours"));
     dateFormatter.addDateFormat(new SecondsFormat("a moment", "%d seconds"));
-    dateFormatter.addDateFormat(new DaysFormat("a day", "%d days"));
     dateFormatter.addDateFormat(new MinutesFormat("a minute", "%d minutes"));
+    dateFormatter.addDateFormat(new DaysFormat("a day", "%d days"));
     return dateFormatter;
   }
 

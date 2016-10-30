@@ -1,22 +1,13 @@
 package com.tonilopezmr.tuiterplus;
 
-import com.tonilopezmr.tuiterplus.controller.CommandLine;
-import com.tonilopezmr.tuiterplus.controller.Processor;
-import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.User;
-import com.tonilopezmr.tuiterplus.repository.InMemoryPostCollection;
-import com.tonilopezmr.tuiterplus.usercases.GetPosts;
-import com.tonilopezmr.tuiterplus.view.ConsoleCLI;
-import com.tonilopezmr.tuiterplus.view.View;
-import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
-import com.tonilopezmr.tuiterplus.view.dateformatter.MinutesFormat;
+import com.tonilopezmr.tuiterplus.model.post.Post;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -26,35 +17,8 @@ public class TuiterPlusShould {
 
   private ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-  private DateFormatter getDateFormatter() {
-    DateFormatter dateFormatter = new DateFormatter();
-    dateFormatter.addDateFormat(new MinutesFormat("a minute", "%d minutes"));
-    return dateFormatter;
-  }
-
-  private View willTypeLine(String line) {
-    return new ConsoleCLI(new Scanner(line), new PrintStream(out), getDateFormatter());
-  }
-
-  private TuiterPlus giveTuiterPlus(View view) {
-    Processor processor = new Processor(new GetPosts(new InMemoryPostCollection()));
-    CommandLine commandLine = new CommandLine(view, processor);
-    return new TuiterPlus(commandLine);
-  }
-
-  private Processor giveProcessor(List<Post> timeline) {
-    return new Processor(null) {
-      @Override
-      public List<Post> process(String cmd) {
-        return timeline;
-      }
-    };
-  }
-
-  private TuiterPlus getTuiterPlus(View view, Processor processor) {
-    CommandLine commandLine = new CommandLine(view, processor);
-
-    return new TuiterPlus(commandLine);
+  private Scanner willTypeLine(String line) {
+    return new Scanner(line);
   }
 
   private String getOutput() {
@@ -64,26 +28,42 @@ public class TuiterPlusShould {
     return scanner.nextLine();
   }
 
+  private Post getToniPostTwoMinutesAgo() {
+    User toni = new User("Toni");
+    return new Post(toni, "Hello Codurance!", LocalDateTime.now().minusMinutes(2));
+  }
+
+  private PrintStream recordOutPut() {
+    return new PrintStream(out);
+  }
+
   @Test
   public void
   exit_when_command_is_exit() {
-    View view = willTypeLine("exit");
-    TuiterPlus tuiterPlus = giveTuiterPlus(view);
+    ServiceLocator serviceLocator = new ServiceLocatorMockBuilder()
+        .scanner(willTypeLine("exit"))              //simulate input actions
+        .printStream(recordOutPut())
+        .build();
 
+    TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
     tuiterPlus.run();
 
     String output = getOutput();
     assertThat(output, is("exit"));
   }
 
-  @Test public void
-  show_posts_when_read_user_timeline(){
-    User toni = new User("Toni");
-    Post post = new Post(toni, "Hello Codurance!", LocalDateTime.now().minusMinutes(2));
-    Processor processor = giveProcessor(Arrays.asList(post));  //mock output
-    View view = willTypeLine("Toni\nexit"); //simulate input actions
+  @Test
+  public void
+  show_posts_when_read_user_timeline() {
+    Post post = getToniPostTwoMinutesAgo();
 
-    TuiterPlus tuiterPlus = getTuiterPlus(view, processor);
+    ServiceLocator serviceLocator = new ServiceLocatorMockBuilder()
+          .scanner(willTypeLine("Toni\nexit"))              //simulate input actions
+          .printStream(recordOutPut())
+          .postRepository(new MockPostRepository(Arrays.asList(post)))     //mock output
+          .build();
+
+    TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
     tuiterPlus.run();
 
     String output = getOutput();

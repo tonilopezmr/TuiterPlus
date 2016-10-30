@@ -1,13 +1,6 @@
 package com.tonilopezmr.tuiterplus;
 
 import com.tonilopezmr.tuiterplus.controller.CommandLine;
-import com.tonilopezmr.tuiterplus.controller.Processor;
-import com.tonilopezmr.tuiterplus.repository.InMemoryPostCollection;
-import com.tonilopezmr.tuiterplus.usercases.GetPosts;
-import com.tonilopezmr.tuiterplus.view.ConsoleCLI;
-import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
-
-import java.util.Scanner;
 
 /**
  * Application Class, start the CommandLine application.
@@ -29,9 +22,8 @@ public class TuiterPlus {
   }
 
   public static void main(String... args) {
-    ConsoleCLI view = new ConsoleCLI(new Scanner(System.in), System.out, new DateFormatter());
-    Processor processor = new Processor(new GetPosts(new InMemoryPostCollection()));
-    CommandLine commandLine = new CommandLine(view, processor);
+    ServiceLocator.load(new ServiceLocator());
+    CommandLine commandLine = ServiceLocator.get().getCommandLine();
     new TuiterPlus(commandLine).run();
   }
 
