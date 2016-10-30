@@ -1,10 +1,5 @@
-package com.tonilopezmr.tuiterplus.view;
+package com.tonilopezmr.tuiterplus.view.dateformatter;
 
-import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
-import com.tonilopezmr.tuiterplus.view.dateformatter.DaysFormat;
-import com.tonilopezmr.tuiterplus.view.dateformatter.HourFormat;
-import com.tonilopezmr.tuiterplus.view.dateformatter.MinutesFormat;
-import com.tonilopezmr.tuiterplus.view.dateformatter.SecondsFormat;
 import org.junit.Test;
 
 import java.time.Duration;

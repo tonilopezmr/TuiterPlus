@@ -5,6 +5,9 @@ import com.tonilopezmr.tuiterplus.view.View;
 
 import java.util.List;
 
+/**
+ * This is a CommandLine controller, It is responsible to manage the flow of commands to the view.
+ */
 public class CommandLine {
 
   private View view;

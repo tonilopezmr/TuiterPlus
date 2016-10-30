@@ -7,6 +7,9 @@ import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
 
 import java.util.Scanner;
 
+/**
+ * Application Class, start the CommandLine application.
+ */
 public class TuiterPlus {
 
   private CommandLine commandLine;

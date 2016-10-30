@@ -78,8 +78,8 @@ public class TuiterPlusShould {
   show_posts_when_read_user_timeline(){
     User toni = new User("Toni");
     Post post = new Post(toni, "Hello Codurance!", LocalDateTime.now().minusMinutes(2));
-    Processor processor = giveProcessor(Arrays.asList(post));
-    View view = willTypeLine("Toni\nexit");
+    Processor processor = giveProcessor(Arrays.asList(post));  //mock output
+    View view = willTypeLine("Toni\nexit"); //simulate input actions
 
     TuiterPlus tuiterPlus = getTuiterPlus(view, processor);
     tuiterPlus.run();

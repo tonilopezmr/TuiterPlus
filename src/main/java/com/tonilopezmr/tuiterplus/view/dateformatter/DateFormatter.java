@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * DateFormatter is a class to format Duration to String with a collection of DateFormat to choose one.
+ *
+ * It is easy to add news DateFormat.
+ *
+ */
 public class DateFormatter {
 
   private List<DateFormat> dateFormats;
@@ -17,13 +23,9 @@ public class DateFormatter {
     this.dateFormats.add(dateFormat);
   }
 
-  public List<DateFormat> getDateFormats() {
-    return dateFormats;
-  }
-
   public String format(Duration duration) {
     Optional<String> first = dateFormats.stream()
-        .sorted((o1, o2) -> o1.compareTo(o2))
+        .sorted(DateFormat::compareTo)
         .filter(it -> !it.format(duration).isEmpty())
         .map(dateFormat -> dateFormat.format(duration))
         .findFirst();

@@ -13,6 +13,9 @@ import java.time.Duration;
  *      - plural: 2 days
  *      - singular: yesterday
  *
+ * <b>Long dateInSeconds</b> is important because DateFormat needs a order by Time in 1 second,
+ * to start with the largest time.
+ *
  */
 public abstract class DateFormat implements Comparable<DateFormat> {
 
