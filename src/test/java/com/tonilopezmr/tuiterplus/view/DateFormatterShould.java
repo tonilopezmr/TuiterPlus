@@ -17,10 +17,10 @@ public class DateFormatterShould {
 
   private DateFormatter getDateFormatter() {
     DateFormatter dateFormatter = new DateFormatter();
-    dateFormatter.addDateFormat(new HourFormat("hour", "hours"));
-    dateFormatter.addDateFormat(new SecondsFormat("second", "seconds"));
-    dateFormatter.addDateFormat(new DaysFormat("a day", "days"));
-    dateFormatter.addDateFormat(new MinutesFormat("minute", "minutes"));
+    dateFormatter.addDateFormat(new HourFormat("an hour", "%d hours"));
+    dateFormatter.addDateFormat(new SecondsFormat("a moment", "%d seconds"));
+    dateFormatter.addDateFormat(new DaysFormat("a day", "%d days"));
+    dateFormatter.addDateFormat(new MinutesFormat("a minute", "%d minutes"));
     return dateFormatter;
   }
 
@@ -77,15 +77,15 @@ public class DateFormatterShould {
   }
 
   @Test public void
-  return_difference_in_single_format_when_there_is_one(){
+  return_difference_in_seconds_format_when_is_singular(){
     LocalDateTime now = LocalDateTime.now();
-    LocalDateTime after = now.minusDays(1);
+    LocalDateTime after = now.minusSeconds(1);
     Duration duration = Duration.between(after, now);
 
     DateFormatter dateFormatter = getDateFormatter();
     String format = dateFormatter.format(duration);
 
-    assertThat(format, is("1 a day"));
+    assertThat(format, is("a moment"));
   }
 
 }

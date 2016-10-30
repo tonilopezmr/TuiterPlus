@@ -26,7 +26,7 @@ public class TuiterPlusShould {
 
   private DateFormatter getDateFormatter() {
     DateFormatter dateFormatter = new DateFormatter();
-    dateFormatter.addDateFormat(new MinutesFormat("minute", "minutes"));
+    dateFormatter.addDateFormat(new MinutesFormat("a minute", "%d minutes"));
     return dateFormatter;
   }
 
