@@ -1,7 +1,8 @@
 package com.tonilopezmr.tuiterplus;
 
-import com.tonilopezmr.tuiterplus.model.User;
+import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.model.post.Post;
+import com.tonilopezmr.tuiterplus.repository.MockPostRepository;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -40,7 +41,7 @@ public class TuiterPlusShould {
   @Test
   public void
   exit_when_command_is_exit() {
-    ServiceLocator serviceLocator = new ServiceLocatorMockBuilder()
+    ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
         .scanner(willTypeLine("exit"))              //simulate input actions
         .printStream(recordOutPut())
         .build();
@@ -57,7 +58,7 @@ public class TuiterPlusShould {
   show_posts_when_read_user_timeline() {
     Post post = getToniPostTwoMinutesAgo();
 
-    ServiceLocator serviceLocator = new ServiceLocatorMockBuilder()
+    ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
           .scanner(willTypeLine("Toni\nexit"))              //simulate input actions
           .printStream(recordOutPut())
           .postRepository(new MockPostRepository(Arrays.asList(post)))     //mock output

@@ -1,6 +1,6 @@
-package com.tonilopezmr.tuiterplus;
+package com.tonilopezmr.tuiterplus.repository;
 
-import com.tonilopezmr.tuiterplus.model.User;
+import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.post.PostRepository;
 

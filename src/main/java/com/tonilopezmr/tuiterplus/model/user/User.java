@@ -1,4 +1,4 @@
-package com.tonilopezmr.tuiterplus.model;
+package com.tonilopezmr.tuiterplus.model.user;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,10 @@ public class User {
 
   public List<User> getFollowing() {
     return new ArrayList<User>(following);
+  }
+
+  public void addFollow(User followed) {
+    this.following.add(followed);
   }
 
   @Override

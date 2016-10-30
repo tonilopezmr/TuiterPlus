@@ -1,42 +1,51 @@
 package com.tonilopezmr.tuiterplus.controller;
 
-import com.tonilopezmr.tuiterplus.model.post.Post;
-import com.tonilopezmr.tuiterplus.model.User;
-import com.tonilopezmr.tuiterplus.repository.InMemoryPostCollection;
-import com.tonilopezmr.tuiterplus.usercases.GetPosts;
+import com.tonilopezmr.tuiterplus.MockServiceLocatorBuilder;
+import com.tonilopezmr.tuiterplus.ServiceLocator;
+import com.tonilopezmr.tuiterplus.usercases.CreatePost;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-
-import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ProcessorShould {
 
-  private GetPosts willGetPosts(List<Post> posts) {
-    return new GetPosts(new InMemoryPostCollection() {
-      @Override
-      public List<Post> getPostsBy(User user) {
-        return posts;
-      }
-    });
-  }
-
   @Test
   public void
-  return_posts_when_the_command_is_a_user(){
-    User toni = new User("Toni");
-    Post post = new Post(toni, "Hello Codurance!", LocalDateTime.now().minusMinutes(2));
-    GetPosts getPosts = willGetPosts(Arrays.asList(post));
-    Processor processor = new Processor(getPosts);
+  get_user_and_post_arguments_from_the_command() {
+    MockCreatePost mockCreatePost = new MockCreatePost();  //To intercept arguments
+    ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
+        .createPost(mockCreatePost)
+        .build();
+    Processor processor = serviceLocator.getProcessor();
 
-    List<Post> posts = processor.process("Toni");
+    processor.process("Toni -> Hello Codurance!");
 
-    assertTrue(posts.size() > 0);
-    assertThat(posts.get(0).getPost(), is("Hello Codurance!"));
+    assertThat(mockCreatePost.getUserName(), is("Toni"));
+    assertThat(mockCreatePost.getPost(), is("Hello Codurance!"));
   }
 
+  private class MockCreatePost extends CreatePost {
+
+    private String userName;
+    private String post;
+
+    public MockCreatePost() {
+      super(null, null);
+    }
+
+    @Override
+    public void doIt(String userName, String post) {
+      this.userName = userName;
+      this.post = post;
+    }
+
+    public String getUserName() {
+      return userName;
+    }
+
+    public String getPost() {
+      return post;
+    }
+  }
 }

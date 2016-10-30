@@ -1,6 +1,6 @@
 package com.tonilopezmr.tuiterplus.usercases;
 
-import com.tonilopezmr.tuiterplus.model.User;
+import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.post.PostRepository;
 
@@ -14,7 +14,7 @@ public class GetPosts {
     this.postRepository = postRepository;
   }
 
-  public List<Post> getPosts(String userName) {
+  public List<Post> getIt(String userName) {
     return postRepository.getPostsBy(new User(userName));
   }
 

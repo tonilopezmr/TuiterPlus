@@ -3,7 +3,10 @@ package com.tonilopezmr.tuiterplus;
 import com.tonilopezmr.tuiterplus.controller.CommandLine;
 import com.tonilopezmr.tuiterplus.controller.Processor;
 import com.tonilopezmr.tuiterplus.model.post.PostRepository;
-import com.tonilopezmr.tuiterplus.repository.InMemoryPostCollection;
+import com.tonilopezmr.tuiterplus.model.user.UserRepository;
+import com.tonilopezmr.tuiterplus.repository.InMemoryPosts;
+import com.tonilopezmr.tuiterplus.repository.InMemoryUsers;
+import com.tonilopezmr.tuiterplus.usercases.CreatePost;
 import com.tonilopezmr.tuiterplus.usercases.GetPosts;
 import com.tonilopezmr.tuiterplus.view.ConsoleCLI;
 import com.tonilopezmr.tuiterplus.view.View;
@@ -16,6 +19,11 @@ import com.tonilopezmr.tuiterplus.view.dateformatter.SecondsFormat;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+/**
+ * Service Locator with all dependencies.
+ * <p>
+ * To replace dependencies It is necessary to do by extension.
+ */
 public class ServiceLocator {
 
   private static ServiceLocator injector;
@@ -50,7 +58,15 @@ public class ServiceLocator {
   }
 
   public PostRepository getPostRepository() {
-    return new InMemoryPostCollection();
+    return new InMemoryPosts();
+  }
+
+  public UserRepository getUserRepository() {
+    return new InMemoryUsers();
+  }
+
+  public CreatePost getCreatePostUseCase() {
+    return new CreatePost(getUserRepository(), getPostRepository());
   }
 
   public GetPosts getPostsUseCase() {
@@ -58,7 +74,7 @@ public class ServiceLocator {
   }
 
   public Processor getProcessor() {
-    return new Processor(getPostsUseCase());
+    return new Processor(getPostsUseCase(), getCreatePostUseCase());
   }
 
   public CommandLine getCommandLine() {

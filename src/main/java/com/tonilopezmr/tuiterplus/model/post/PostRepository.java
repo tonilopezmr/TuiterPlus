@@ -1,6 +1,6 @@
 package com.tonilopezmr.tuiterplus.model.post;
 
-import com.tonilopezmr.tuiterplus.model.User;
+import com.tonilopezmr.tuiterplus.model.user.User;
 
 import java.util.List;
 
