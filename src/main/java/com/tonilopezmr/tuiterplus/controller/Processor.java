@@ -1,6 +1,6 @@
 package com.tonilopezmr.tuiterplus.controller;
 
-import com.tonilopezmr.tuiterplus.model.Post;
+import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.usercases.GetPosts;
 
 import java.util.ArrayList;

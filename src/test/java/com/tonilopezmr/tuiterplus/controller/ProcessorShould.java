@@ -1,7 +1,8 @@
 package com.tonilopezmr.tuiterplus.controller;
 
-import com.tonilopezmr.tuiterplus.model.Post;
+import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.User;
+import com.tonilopezmr.tuiterplus.repository.InMemoryPostCollection;
 import com.tonilopezmr.tuiterplus.usercases.GetPosts;
 import org.junit.Test;
 
@@ -16,12 +17,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ProcessorShould {
 
   private GetPosts willGetPosts(List<Post> posts) {
-    return new GetPosts(){
+    return new GetPosts(new InMemoryPostCollection() {
       @Override
-      public List<Post> getPosts(String userName) {
+      public List<Post> getPostsBy(User user) {
         return posts;
       }
-    };
+    });
   }
 
   @Test

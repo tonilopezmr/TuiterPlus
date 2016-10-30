@@ -2,8 +2,9 @@ package com.tonilopezmr.tuiterplus;
 
 import com.tonilopezmr.tuiterplus.controller.CommandLine;
 import com.tonilopezmr.tuiterplus.controller.Processor;
-import com.tonilopezmr.tuiterplus.model.Post;
+import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.User;
+import com.tonilopezmr.tuiterplus.repository.InMemoryPostCollection;
 import com.tonilopezmr.tuiterplus.usercases.GetPosts;
 import com.tonilopezmr.tuiterplus.view.ConsoleCLI;
 import com.tonilopezmr.tuiterplus.view.View;
@@ -36,7 +37,7 @@ public class TuiterPlusShould {
   }
 
   private TuiterPlus giveTuiterPlus(View view) {
-    Processor processor = new Processor(new GetPosts());
+    Processor processor = new Processor(new GetPosts(new InMemoryPostCollection()));
     CommandLine commandLine = new CommandLine(view, processor);
     return new TuiterPlus(commandLine);
   }

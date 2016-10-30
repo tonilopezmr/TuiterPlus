@@ -1,4 +1,6 @@
-package com.tonilopezmr.tuiterplus.model;
+package com.tonilopezmr.tuiterplus.model.post;
+
+import com.tonilopezmr.tuiterplus.model.User;
 
 import java.time.LocalDateTime;
 

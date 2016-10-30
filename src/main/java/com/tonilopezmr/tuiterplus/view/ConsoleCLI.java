@@ -1,6 +1,6 @@
 package com.tonilopezmr.tuiterplus.view;
 
-import com.tonilopezmr.tuiterplus.model.Post;
+import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
 
 import java.io.PrintStream;

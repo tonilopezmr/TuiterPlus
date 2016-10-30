@@ -2,6 +2,7 @@ package com.tonilopezmr.tuiterplus;
 
 import com.tonilopezmr.tuiterplus.controller.CommandLine;
 import com.tonilopezmr.tuiterplus.controller.Processor;
+import com.tonilopezmr.tuiterplus.repository.InMemoryPostCollection;
 import com.tonilopezmr.tuiterplus.usercases.GetPosts;
 import com.tonilopezmr.tuiterplus.view.ConsoleCLI;
 import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
@@ -29,7 +30,7 @@ public class TuiterPlus {
 
   public static void main(String... args) {
     ConsoleCLI view = new ConsoleCLI(new Scanner(System.in), System.out, new DateFormatter());
-    Processor processor = new Processor(new GetPosts());
+    Processor processor = new Processor(new GetPosts(new InMemoryPostCollection()));
     CommandLine commandLine = new CommandLine(view, processor);
     new TuiterPlus(commandLine).run();
   }
