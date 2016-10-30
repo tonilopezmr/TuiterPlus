@@ -37,24 +37,9 @@ public class ConsoleCLI implements View {
       LocalDateTime postDate = post.getDateTime();
       Duration duration = Duration.between(postDate, now);
 
-      String result = "";
-      int time = 0;
+      String result = new DateFormatter().format(duration);
 
-      if (duration.toDays() > 0) {
-        time = (int) duration.toDays();
-        result = "days";
-      }else if (duration.toHours() > 0) {
-        time = (int) duration.toHours();
-        result = "hours";
-      }else if (duration.toMinutes() > 0) {
-        time = (int) duration.toMinutes();
-        result = "minutes";
-      }else if (duration.getSeconds() > 0) {
-        time = (int) duration.getSeconds();
-        result = "seconds";
-      }
-
-      output.print(output.printf(post.getPost() + " (%d %s ago)\n", time, result));
+      output.print(output.printf(post.getPost() + " (%s ago)\n", result));
     }
   }
 
