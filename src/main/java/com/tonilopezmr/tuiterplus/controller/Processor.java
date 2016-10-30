@@ -16,9 +16,13 @@ import java.util.regex.Pattern;
  */
 public class Processor {
 
-  public static final String POST = "(.*) -> (.*)";
-  public static final String FOLLOW = "(.*) follow (.*)";
-  public static final String WALL = "(.*) wall";
+  public static final String POST_COMMAND = "->";
+  public static final String FOLLOW_COMMAND = "follows";
+  public static final String WALL_COMMAND = "wall";
+
+  private final String POST = String.format("(.*) %s (.*)", POST_COMMAND);
+  private final String FOLLOW = String.format("(.*) %s (.*)", FOLLOW_COMMAND);
+  private final String WALL = String.format("(.*) %s", WALL_COMMAND);
 
   private GetPosts getPosts;
   private CreatePost createPost;

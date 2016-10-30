@@ -19,7 +19,7 @@ public class FollowUser {
 
     if (oFollower.isPresent() && oFollowed.isPresent()) {
       User follower = oFollower.get();
-      follower.addFollow(new User(followedName));
+      follower.addFollow(oFollowed.get());
     }
 
   }

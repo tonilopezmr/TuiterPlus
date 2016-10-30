@@ -19,7 +19,7 @@ public class ProcessorShould {
     MockCreatePost mockCreatePost = new MockCreatePost();  //To intercept arguments
     Processor processor = new Processor(null, mockCreatePost, null, null);
 
-    processor.process("Toni -> Hello Codurance!");
+    processor.process(String.format("Toni %s Hello Codurance!", Processor.POST_COMMAND));
 
     assertThat(mockCreatePost.getUserNameArg(), is("Toni"));
     assertThat(mockCreatePost.getPostArg(), is("Hello Codurance!"));
@@ -30,7 +30,7 @@ public class ProcessorShould {
     MockGetWall mockGetWall = new MockGetWall();
     Processor processor = new Processor(null, null, mockGetWall, null);
 
-    processor.process("Toni wall");
+    processor.process(String.format("Toni %s", Processor.WALL_COMMAND));
 
     assertThat(mockGetWall.getUserNameArg(), is("Toni"));
   }
@@ -41,7 +41,7 @@ public class ProcessorShould {
     MockFollowUser mockFollowUser = new MockFollowUser();
     Processor processor = new Processor(null, null, null, mockFollowUser);
 
-    processor.process("Toni follow Rodrigo");
+    processor.process(String.format("Toni %s Rodrigo", Processor.FOLLOW_COMMAND));
 
     assertThat(mockFollowUser.getFollower(), is("Toni"));
     assertThat(mockFollowUser.getFollowed(), is("Rodrigo"));

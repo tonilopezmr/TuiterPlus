@@ -1,15 +1,12 @@
 package com.tonilopezmr.tuiterplus;
 
-import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.model.post.Post;
-import com.tonilopezmr.tuiterplus.repository.MockPostRepository;
-import com.tonilopezmr.tuiterplus.repository.MockUserRepository;
+import com.tonilopezmr.tuiterplus.model.user.User;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -70,75 +67,48 @@ public class TuiterPlusShould {
 
   @Test
   public void
-  show_posts_when_read_user_timeline() {
-    Post post = getToniPostTwoMinutesAgo();
+  show_posts_when_read_user_timeline_after_post() {
+    String commands = "Toni -> Hello Codurance!\n";
+    commands += "SomeBody\n";
+    commands += "Toni -> Cat Cat\n";
+    commands += "Toni\n";
+    commands += "exit";
 
     ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
-        .scanner(willTypeLine("Toni\nexit"))              //simulate input actions
+        .scanner(willTypeLine(commands))
         .printStream(recordOutPut())
-        .postRepository(new MockPostRepository(Arrays.asList(post)))     //mock output
         .build();
 
     TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
     tuiterPlus.run();
 
-    String output = getOutput(1);
-    assertThat(output, is("Hello Codurance! (2 minutes ago)"));
-  }
-
-  @Test
-  public void
-  not_show_anything_when_create_a_post() {
-    ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
-        .scanner(willTypeLine("Toni -> Hello Codurance!\nexit"))
-        .printStream(recordOutPut())
-        .build();
-    TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
-
-    tuiterPlus.run();
-
-    String output = getOutput(1); //1 is the index of response
-    assertThat(output, is(""));
+    String output = getOutput(4);
+    assertThat(output, is("Cat Cat (a moment ago)"));
+    output = getOutput(5);
+    assertThat(output, is("Hello Codurance! (a moment ago)"));
   }
 
   @Test
   public void
   show_post_when_get_wall_timeline() {
-    Post post = getToniPostTwoMinutesAgo();
-    Post post2 = new Post(post.getUser(), "Hey Alvaro have a look my repo", LocalDateTime.now().minusSeconds(1));
+    String commands = "Toni -> Hello Codurance!\n";
+    commands += "Alvaro -> Hello Toni\n";
+    commands += "Toni follows Alvaro\n";
+    commands += "Toni wall\n";
+    commands += "exit\n";
 
     ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
-        .scanner(willTypeLine("Toni wall\nexit"))
+        .scanner(willTypeLine(commands))
         .printStream(recordOutPut())
-        .postRepository(new MockPostRepository(Arrays.asList(post, post2)))     //mock output
-        .userRepository(new MockUserRepository(new User("Toni")))
         .build();
     TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
 
     tuiterPlus.run();
 
-    String output = getOutput(1);
-    assertThat(output, is("Hey Alvaro have a look my repo (a moment ago)"));
-    output = getOutput(2);
-    assertThat(output, is("Hello Codurance! (2 minutes ago)"));
-  }
-
-  @Test
-  public void
-  not_show_anything_when_user_follows_another() {
-    User toni = new User("Toni");
-    User alvaro = new User("Alvaro");
-    ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
-        .scanner(willTypeLine("Toni follows Alvaro\nexit"))
-        .printStream(recordOutPut())
-        .userRepository(new MockUserRepository(Arrays.asList(toni, alvaro)))
-        .build();
-    TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
-
-    tuiterPlus.run();
-
-    String output = getOutput(1);
-    assertThat(output, is(""));
+    String output = getOutput(4);
+    assertThat(output, is("Hello Toni (a moment ago)"));
+    output = getOutput(5);
+    assertThat(output, is("Hello Codurance! (a moment ago)"));
   }
 
 }
