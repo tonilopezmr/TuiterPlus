@@ -1,7 +1,7 @@
 package com.tonilopezmr.tuiterplus;
 
 import com.tonilopezmr.tuiterplus.controller.CommandLine;
-import com.tonilopezmr.tuiterplus.controller.Processor;
+import com.tonilopezmr.tuiterplus.controller.CommandProcessor;
 import com.tonilopezmr.tuiterplus.controller.commands.Command;
 import com.tonilopezmr.tuiterplus.controller.commands.FollowCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.PostCommand;
@@ -101,15 +101,15 @@ public class ServiceLocator {
 
   public List<Command> getCommands() {
     ArrayList<Command> commands = new ArrayList<>();
-    commands.add(new PostCommand(Processor.POST_COMMAND, new EmptyPrinter(), getCreatePostUseCase()));
-    commands.add(new FollowCommand(Processor.FOLLOW_COMMAND, new EmptyPrinter(), getFollowUserUseCase()));
-    commands.add(new WallCommand(Processor.WALL_COMMAND, new WallTimelinePrinter(), getWallTimelineUseCase()));
-    commands.add(new ReadTimelineCommand(Processor.READ_COMMAND, new PostsPrinter(), getPostsUseCase()));
+    commands.add(new PostCommand(CommandProcessor.POST_COMMAND, new EmptyPrinter(), getCreatePostUseCase()));
+    commands.add(new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new EmptyPrinter(), getFollowUserUseCase()));
+    commands.add(new WallCommand(CommandProcessor.WALL_COMMAND, new WallTimelinePrinter(), getWallTimelineUseCase()));
+    commands.add(new ReadTimelineCommand(CommandProcessor.READ_COMMAND, new PostsPrinter(), getPostsUseCase()));
     return commands;
   }
 
-  public Processor getProcessor() {
-    return new Processor(getCommands());
+  public CommandProcessor getProcessor() {
+    return new CommandProcessor(getCommands());
   }
 
   public CommandLine getCommandLine() {

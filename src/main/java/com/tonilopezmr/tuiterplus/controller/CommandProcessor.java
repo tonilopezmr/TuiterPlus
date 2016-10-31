@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Process the commands and return a result.
  */
-public class Processor {
+public class CommandProcessor {
 
   public static final String POST = "->";
   public static final String FOLLOWS = "follows";
@@ -22,7 +22,7 @@ public class Processor {
 
   private List<Command> commands;
 
-  public Processor(List<Command> commands) {
+  public CommandProcessor(List<Command> commands) {
     this.commands = commands;
   }
 

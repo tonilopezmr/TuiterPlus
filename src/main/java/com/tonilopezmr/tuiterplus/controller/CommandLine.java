@@ -10,9 +10,9 @@ public class CommandLine {
 
   private View view;
   private boolean exit;
-  private Processor processor;
+  private CommandProcessor processor;
 
-  public CommandLine(View view, Processor processor) {
+  public CommandLine(View view, CommandProcessor processor) {
     this.view = view;
     this.exit = false;
     this.processor = processor;

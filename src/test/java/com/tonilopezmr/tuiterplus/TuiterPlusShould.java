@@ -1,6 +1,6 @@
 package com.tonilopezmr.tuiterplus;
 
-import com.tonilopezmr.tuiterplus.controller.Processor;
+import com.tonilopezmr.tuiterplus.controller.CommandProcessor;
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.user.User;
 import org.junit.Test;
@@ -55,7 +55,7 @@ public class TuiterPlusShould {
   public void
   exit_when_command_is_exit() {
     ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
-        .scanner(willTypeLine(Processor.EXIT_COMMAND))              //simulate input actions
+        .scanner(willTypeLine(CommandProcessor.EXIT_COMMAND))              //simulate input actions
         .printStream(recordOutPut())
         .build();
 

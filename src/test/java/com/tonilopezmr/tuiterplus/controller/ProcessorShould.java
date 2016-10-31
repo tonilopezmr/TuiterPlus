@@ -22,10 +22,10 @@ public class ProcessorShould {
   public void
   get_user_and_post_arguments_when_post() {
     MockCreatePost mockCreatePost = new MockCreatePost();  //To intercept arguments
-    PostCommand postCommand = new PostCommand(Processor.POST_COMMAND, new EmptyPrinter(), mockCreatePost);
-    Processor processor = new Processor(Arrays.asList(postCommand));
+    PostCommand postCommand = new PostCommand(CommandProcessor.POST_COMMAND, new EmptyPrinter(), mockCreatePost);
+    CommandProcessor processor = new CommandProcessor(Arrays.asList(postCommand));
 
-    processor.process(String.format("Toni %s Hello Codurance!", Processor.POST));
+    processor.process(String.format("Toni %s Hello Codurance!", CommandProcessor.POST));
 
     assertThat(mockCreatePost.getUserNameArg(), is("Toni"));
     assertThat(mockCreatePost.getPostArg(), is("Hello Codurance!"));
@@ -34,10 +34,10 @@ public class ProcessorShould {
   @Test public void
   get_user_argument_when_get_wall(){
     MockReadWall mockGetWall = new MockReadWall();
-    WallCommand wallCommand = new WallCommand(Processor.WALL_COMMAND, new EmptyPrinter(), mockGetWall);
-    Processor processor = new Processor(Arrays.asList(wallCommand));
+    WallCommand wallCommand = new WallCommand(CommandProcessor.WALL_COMMAND, new EmptyPrinter(), mockGetWall);
+    CommandProcessor processor = new CommandProcessor(Arrays.asList(wallCommand));
 
-    processor.process(String.format("Toni %s", Processor.WALL));
+    processor.process(String.format("Toni %s", CommandProcessor.WALL));
 
     assertThat(mockGetWall.getUserNameArg(), is("Toni"));
   }
@@ -46,10 +46,10 @@ public class ProcessorShould {
   public void
   get_follower_and_followed_arguments_when_user_follows() {
     MockFollowUser mockFollowUser = new MockFollowUser();
-    FollowCommand followCommand = new FollowCommand(Processor.FOLLOW_COMMAND, new EmptyPrinter(), mockFollowUser);
-    Processor processor = new Processor(Arrays.asList(followCommand));
+    FollowCommand followCommand = new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new EmptyPrinter(), mockFollowUser);
+    CommandProcessor processor = new CommandProcessor(Arrays.asList(followCommand));
 
-    processor.process(String.format("Toni %s Rodrigo", Processor.FOLLOWS));
+    processor.process(String.format("Toni %s Rodrigo", CommandProcessor.FOLLOWS));
 
     assertThat(mockFollowUser.getFollower(), is("Toni"));
     assertThat(mockFollowUser.getFollowed(), is("Rodrigo"));
