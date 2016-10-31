@@ -34,11 +34,27 @@ public class CommandsAssembler {
     ReadUserTimeline postsUseCase = serviceLocator.getPostsUseCase();
 
     ArrayList<Command> commands = new ArrayList<>();
-    commands.add(new PostCommand(CommandProcessor.POST_COMMAND, new EmptyPrinter(), createPostUseCase));
-    commands.add(new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new EmptyPrinter(), followUserUseCase));
-    commands.add(new WallCommand(CommandProcessor.WALL_COMMAND, new WallTimelinePrinter(view), wallTimelineUseCase));
-    commands.add(new ReadTimelineCommand(CommandProcessor.READ_COMMAND, new TimelinePrinter(view), postsUseCase));
+    commands.add(getPostCommand(createPostUseCase));
+    commands.add(getFollowCommand(followUserUseCase));
+    commands.add(getWallCommand(view, wallTimelineUseCase));
+    commands.add(getReadTimelineCommand(view, postsUseCase));
     return commands;
+  }
+
+  private ReadTimelineCommand getReadTimelineCommand(View view, ReadUserTimeline postsUseCase) {
+    return new ReadTimelineCommand(CommandProcessor.READ_COMMAND, new TimelinePrinter(view), postsUseCase);
+  }
+
+  private WallCommand getWallCommand(View view, ReadWallTimeline wallTimelineUseCase) {
+    return new WallCommand(CommandProcessor.WALL_COMMAND, new WallTimelinePrinter(view), wallTimelineUseCase);
+  }
+
+  private FollowCommand getFollowCommand(FollowUser followUserUseCase) {
+    return new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new EmptyPrinter(), followUserUseCase);
+  }
+
+  private PostCommand getPostCommand(AddPost createPostUseCase) {
+    return new PostCommand(CommandProcessor.POST_COMMAND, new EmptyPrinter(), createPostUseCase);
   }
 
 }
