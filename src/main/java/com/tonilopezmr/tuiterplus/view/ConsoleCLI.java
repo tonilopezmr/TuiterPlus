@@ -38,11 +38,12 @@ public class ConsoleCLI implements View {
     show("******** Tuiter+ tonilopezmr ********\n");
     show("*************************************\n\n");
 
-    show("How to use (before ':' are not part of the commands):\n\n");
-    show("\tposting: <user name> -> <message>\n");
-    show("\treading: <user name>\n");
-    show("\tfollowing: <user name> follows <another user>\n");
-    show("\twall: <user name> wall\n");
+    show("IMPORTANT: Users are created as they post their first post\n\n");
+    show("How to use (before ':' are not part of the commands)\n\n");
+    show("\tto posting: <user name> -> <message>\n");
+    show("\tto reading: <user name>\n");
+    show("\tto following: <user name> follows <another user>\n");
+    show("\tto wall: <user name> wall\n");
     show("\tto exit: exit \n\n\n");
   }
 

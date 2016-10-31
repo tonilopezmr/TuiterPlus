@@ -59,7 +59,7 @@ public class TuiterPlusShould {
     tuiterPlus.run();
 
     String output = getOutput(1);
-    assertThat(output, is("*************************************"));
+    assertThat(output, is(""));
   }
 
   @Test
