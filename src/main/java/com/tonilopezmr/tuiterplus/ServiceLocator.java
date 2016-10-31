@@ -7,7 +7,7 @@ import com.tonilopezmr.tuiterplus.controller.commands.FollowCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.PostCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.ReadTimelineCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.WallCommand;
-import com.tonilopezmr.tuiterplus.model.CreationTime;
+import com.tonilopezmr.tuiterplus.model.TimeProvider;
 import com.tonilopezmr.tuiterplus.model.post.PostRepository;
 import com.tonilopezmr.tuiterplus.model.user.UserRepository;
 import com.tonilopezmr.tuiterplus.repository.InMemoryPosts;
@@ -68,8 +68,8 @@ public class ServiceLocator {
     return System.out;
   }
 
-  public CreationTime getCreationTime() {
-    return new CreationTime();
+  public TimeProvider getCreationTime() {
+    return new TimeProvider();
   }
 
   public View getView() {

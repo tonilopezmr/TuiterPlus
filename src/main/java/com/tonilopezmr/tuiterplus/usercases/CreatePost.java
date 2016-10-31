@@ -1,6 +1,6 @@
 package com.tonilopezmr.tuiterplus.usercases;
 
-import com.tonilopezmr.tuiterplus.model.CreationTime;
+import com.tonilopezmr.tuiterplus.model.TimeProvider;
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.post.PostRepository;
 import com.tonilopezmr.tuiterplus.model.user.User;
@@ -12,9 +12,9 @@ public class CreatePost {
 
   private UserRepository userRepository;
   private PostRepository postRepository;
-  private CreationTime localDateTime;
+  private TimeProvider localDateTime;
 
-  public CreatePost(UserRepository userRepository, PostRepository postRepository, CreationTime localDateTime) {
+  public CreatePost(UserRepository userRepository, PostRepository postRepository, TimeProvider localDateTime) {
     this.userRepository = userRepository;
     this.postRepository = postRepository;
     this.localDateTime = localDateTime;
@@ -31,6 +31,6 @@ public class CreatePost {
       user = oUser.get();
     }
 
-    postRepository.create(new Post(user, post, localDateTime.now()));
+    postRepository.create(new Post(user, post, localDateTime.timeNow()));
   }
 }

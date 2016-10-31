@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class TimeProvider {
 
-  public LocalDateTime now(){
+  public LocalDateTime timeNow(){
     return LocalDateTime.now().minusSeconds(1); //at least one second
   }
 
