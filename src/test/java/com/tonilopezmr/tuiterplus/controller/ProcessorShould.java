@@ -4,12 +4,10 @@ import com.tonilopezmr.tuiterplus.controller.commands.FollowCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.PostCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.WallCommand;
 import com.tonilopezmr.tuiterplus.model.post.Timeline;
-import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.usercases.CreatePost;
 import com.tonilopezmr.tuiterplus.usercases.FollowUser;
 import com.tonilopezmr.tuiterplus.usercases.ReadWallTimeline;
 import com.tonilopezmr.tuiterplus.view.Printer;
-import com.tonilopezmr.tuiterplus.view.printer.EmptyPrinter;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -24,7 +22,8 @@ public class ProcessorShould {
   public void
   get_user_and_post_arguments_when_post() {
     MockCreatePost mockCreatePost = new MockCreatePost();  //To intercept arguments
-    PostCommand postCommand = new PostCommand(CommandProcessor.POST_COMMAND, new EmptyPrinter(), mockCreatePost);
+    MyCustomPrinter customPrinter = new MyCustomPrinter();
+    PostCommand postCommand = new PostCommand(CommandProcessor.POST_COMMAND, customPrinter, mockCreatePost);
     CommandProcessor processor = new CommandProcessor(Arrays.asList(postCommand));
 
     processor.process(String.format("Toni %s Hello Codurance!", CommandProcessor.POST));
@@ -36,7 +35,8 @@ public class ProcessorShould {
   @Test public void
   get_user_argument_when_get_wall(){
     MockReadWall mockGetWall = new MockReadWall();
-    WallCommand wallCommand = new WallCommand(CommandProcessor.WALL_COMMAND, new EmptyPrinter(), mockGetWall);
+    MyCustomPrinter customPrinter = new MyCustomPrinter();
+    WallCommand wallCommand = new WallCommand(CommandProcessor.WALL_COMMAND, customPrinter, mockGetWall);
     CommandProcessor processor = new CommandProcessor(Arrays.asList(wallCommand));
 
     processor.process(String.format("Toni %s", CommandProcessor.WALL));
@@ -48,7 +48,8 @@ public class ProcessorShould {
   public void
   get_follower_and_followed_arguments_when_user_follows() {
     MockFollowUser mockFollowUser = new MockFollowUser();
-    FollowCommand followCommand = new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new EmptyPrinter(), mockFollowUser);
+    MyCustomPrinter customPrinter = new MyCustomPrinter();
+    FollowCommand followCommand = new FollowCommand(CommandProcessor.FOLLOW_COMMAND, customPrinter, mockFollowUser);
     CommandProcessor processor = new CommandProcessor(Arrays.asList(followCommand));
 
     processor.process(String.format("Toni %s Rodrigo", CommandProcessor.FOLLOWS));
@@ -60,12 +61,25 @@ public class ProcessorShould {
   @Test public void
   return_a_expected_printer_when_follows(){
     MockFollowUser mockFollowUser = new MockFollowUser();
-    FollowCommand followCommand = new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new MyFollowCustomPrinter(), mockFollowUser);
+    MyCustomPrinter customPrinter = new MyCustomPrinter();
+    FollowCommand followCommand = new FollowCommand(CommandProcessor.FOLLOW_COMMAND, customPrinter, mockFollowUser);
     CommandProcessor processor = new CommandProcessor(Arrays.asList(followCommand));
 
     Printer printer = processor.process(String.format("Toni %s Rodrigo", CommandProcessor.FOLLOWS));
 
-    assertThat(printer, instanceOf(MyFollowCustomPrinter.class));
+    assertThat(printer, instanceOf(MyCustomPrinter.class));
+  }
+
+  @Test public void
+  return_a_expected_output_when_read_wall_timeline(){
+    MockReadWall mockGetWall = new MockReadWall();
+    MyCustomPrinter customPrinter = new MyCustomPrinter();
+    WallCommand wallCommand = new WallCommand(CommandProcessor.WALL_COMMAND, customPrinter, mockGetWall);
+    CommandProcessor processor = new CommandProcessor(Arrays.asList(wallCommand));
+
+    Printer printer = processor.process(String.format("Toni %s", CommandProcessor.WALL));
+
+    assertThat(printer, instanceOf(MyCustomPrinter.class));
   }
 
   private class MockCreatePost extends CreatePost {
@@ -135,14 +149,14 @@ public class ProcessorShould {
     }
   }
 
-  private class MyFollowCustomPrinter implements Printer<User> {
+  private class MyCustomPrinter implements Printer {
     @Override
     public void print() {
 
     }
 
     @Override
-    public void load(User printable) {
+    public void load(Object printable) {
 
     }
   }
