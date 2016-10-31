@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ProcessorShould {
+public class CommandProcessorShould {
 
   @Test
   public void
