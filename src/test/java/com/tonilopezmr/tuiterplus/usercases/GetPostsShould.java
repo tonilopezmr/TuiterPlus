@@ -4,11 +4,10 @@ import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.post.PostRepository;
 import com.tonilopezmr.tuiterplus.model.post.Timeline;
 import com.tonilopezmr.tuiterplus.model.user.User;
-import com.tonilopezmr.tuiterplus.repository.MockPostRepository;
+import com.tonilopezmr.tuiterplus.repository.InMemoryPosts;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
@@ -17,11 +16,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class GetPostsShould {
 
   private PostRepository getToniPosts() {
+    InMemoryPosts posts = new InMemoryPosts();
     User toni = new User("Toni");
-    Post post = new Post(toni, "Hello Codurance!", LocalDateTime.now());
-    Post post1 = new Post(toni, "Tomorrow I have a Software Engineer exam :(", LocalDateTime.now().minusMinutes(30));
+    posts.create(new Post(toni, "Hello Codurance!", LocalDateTime.now()));
+    posts.create(new Post(toni, "Tomorrow I have a Software Engineer exam :(", LocalDateTime.now().minusMinutes(30)));
 
-    return new MockPostRepository(Arrays.asList(post1, post));
+    return posts;
   }
 
   @Test

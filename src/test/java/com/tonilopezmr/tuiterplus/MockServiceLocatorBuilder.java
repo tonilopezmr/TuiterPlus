@@ -1,8 +1,6 @@
 package com.tonilopezmr.tuiterplus;
 
 import com.tonilopezmr.tuiterplus.model.TimeProvider;
-import com.tonilopezmr.tuiterplus.model.post.PostRepository;
-import com.tonilopezmr.tuiterplus.model.user.UserRepository;
 
 import java.io.PrintStream;
 import java.time.LocalDateTime;
@@ -17,8 +15,6 @@ public class MockServiceLocatorBuilder {
 
   private Scanner scanner;
   private PrintStream printStream;
-  private PostRepository postRepository;
-  private UserRepository userRepository;
   private int timeDelay;
 
   public MockServiceLocatorBuilder scanner(Scanner scanner) {
@@ -28,16 +24,6 @@ public class MockServiceLocatorBuilder {
 
   public MockServiceLocatorBuilder printStream(PrintStream printStream) {
     this.printStream = printStream;
-    return this;
-  }
-
-  public MockServiceLocatorBuilder postRepository(PostRepository postRepository) {
-    this.postRepository = postRepository;
-    return this;
-  }
-
-  public MockServiceLocatorBuilder userRepository(UserRepository userRepository) {
-    this.userRepository = userRepository;
     return this;
   }
 
@@ -65,16 +51,6 @@ public class MockServiceLocatorBuilder {
       @Override
       public PrintStream getPrintStream() {
         return printStream != null ? printStream : super.getPrintStream();
-      }
-
-      @Override
-      public PostRepository getPostRepository() {
-        return postRepository != null ? postRepository : super.getPostRepository();
-      }
-
-      @Override
-      public UserRepository getUserRepository() {
-        return userRepository != null ? userRepository : super.getUserRepository();
       }
 
       @Override

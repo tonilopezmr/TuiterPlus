@@ -69,7 +69,7 @@ public class TuiterPlusShould {
     ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
         .scanner(willTypeLine(commands))
         .printStream(recordOutPut())
-        .creationTimeBeetweenPosts(100)
+        .creationTimeBeetweenPosts(100)    //see method doc
         .build();
 
     TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
@@ -93,7 +93,7 @@ public class TuiterPlusShould {
     ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
         .scanner(willTypeLine(commands))
         .printStream(recordOutPut())
-        .creationTimeBeetweenPosts(100)  //see method doc
+        .creationTimeBeetweenPosts(100)
         .build();
     TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
 

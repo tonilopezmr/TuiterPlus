@@ -27,10 +27,11 @@ public class InMemoryUsers implements UserRepository {
 
   @Override
   public void follow(User follower, User followed) {
-    Optional<User> user = get(follower.getName());
+    Optional<User> oUser = get(follower.getName());
 
-    if (user.isPresent()) {
-      user.get().addFollow(followed);
+    if (oUser.isPresent()) {
+      User user = oUser.get();
+      user.addFollow(followed);
     }
   }
 }
