@@ -2,10 +2,10 @@ package com.tonilopezmr.tuiterplus.usercases;
 
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.post.PostRepository;
+import com.tonilopezmr.tuiterplus.model.post.Timeline;
 import com.tonilopezmr.tuiterplus.model.user.User;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ReadUserTimeline {
 
@@ -15,10 +15,11 @@ public class ReadUserTimeline {
     this.postRepository = postRepository;
   }
 
-  public List<Post> getIt(String userName) {
-    return postRepository.getPostsBy(new User(userName))
-        .stream().sorted(Post::compareTo)
-        .collect(Collectors.toList());
+  public Timeline getIt(String userName) {
+    Timeline timeline = new Timeline();
+    List<Post> postsByUser = postRepository.getPostsBy(new User(userName));
+    timeline.addAll(postsByUser);
+    return timeline;
   }
 
 }

@@ -1,18 +1,16 @@
 package com.tonilopezmr.tuiterplus.view;
 
-import com.tonilopezmr.tuiterplus.model.post.Post;
-
-import java.util.List;
+import com.tonilopezmr.tuiterplus.model.post.Timeline;
 
 /**
- * What can my view do
+ * What my view can do
  */
 public interface View {
 
   void showPrompt();
   String readCommandLine();
   void showFareWell();
-  void show(List<Post> posts);
-  void showWallTimeline(List<Post> posts);
+  void show(Timeline timeline);
+  void showWallTimeline(Timeline posts);
 
 }

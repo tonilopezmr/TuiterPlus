@@ -2,13 +2,13 @@ package com.tonilopezmr.tuiterplus.usercases;
 
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.post.PostRepository;
+import com.tonilopezmr.tuiterplus.model.post.Timeline;
 import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.repository.MockPostRepository;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
@@ -30,7 +30,7 @@ public class GetPostsShould {
     PostRepository postRepository = getToniPosts();
     ReadUserTimeline readUserTimeline = new ReadUserTimeline(postRepository);
 
-    List<Post> posts = readUserTimeline.getIt("Toni");
+    Timeline posts = readUserTimeline.getIt("Toni");
 
     assertTrue(!posts.isEmpty());
     assertThat(posts.get(0).getPost(), is("Hello Codurance!"));

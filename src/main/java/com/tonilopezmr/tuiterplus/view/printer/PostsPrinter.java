@@ -1,15 +1,12 @@
 package com.tonilopezmr.tuiterplus.view.printer;
 
-import com.tonilopezmr.tuiterplus.model.post.Post;
+import com.tonilopezmr.tuiterplus.model.post.Timeline;
 import com.tonilopezmr.tuiterplus.view.Printer;
 import com.tonilopezmr.tuiterplus.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
+public class PostsPrinter implements Printer<Timeline> {
 
-public class PostsPrinter implements Printer<List<Post>> {
-
-  private List<Post> posts;
+  private Timeline timeline;
   private View view;
 
   public PostsPrinter(View view) {
@@ -18,12 +15,12 @@ public class PostsPrinter implements Printer<List<Post>> {
 
   @Override
   public void print() {
-    view.show(posts);
+    view.show(timeline);
   }
 
   @Override
-  public void load(List<Post> posts) {
-    this.posts = new ArrayList<>(posts);
+  public void load(Timeline timeline) {
+    this.timeline = timeline;
   }
 
 }

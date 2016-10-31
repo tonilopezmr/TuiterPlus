@@ -1,13 +1,13 @@
 package com.tonilopezmr.tuiterplus.view;
 
 import com.tonilopezmr.tuiterplus.model.post.Post;
+import com.tonilopezmr.tuiterplus.model.post.Timeline;
 import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
 
 import java.io.PrintStream;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -42,7 +42,7 @@ public class ConsoleCLI implements View {
     output.print(message);
   }
 
-  public void show(List<Post> posts) {
+  public void show(Timeline posts) {
     for (Post post : posts) {
 
       LocalDateTime now = LocalDateTime.now();
@@ -56,7 +56,7 @@ public class ConsoleCLI implements View {
   }
 
   @Override
-  public void showWallTimeline(List<Post> posts) {
+  public void showWallTimeline(Timeline posts) {
     for (Post post : posts) {
 
       LocalDateTime now = LocalDateTime.now();

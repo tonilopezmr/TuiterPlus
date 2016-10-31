@@ -6,7 +6,7 @@ import com.tonilopezmr.tuiterplus.view.Printer;
 import java.util.List;
 
 /**
- * Process the commands and return a result.
+ * Process the commands and return a printable output.
  */
 public class CommandProcessor {
 
@@ -30,7 +30,7 @@ public class CommandProcessor {
 
     return commands.stream()
         .filter(it -> it.matches(cmd))
-        .map(it -> it.process())
+        .map(Command::process)
         .findFirst().get();
   }
 

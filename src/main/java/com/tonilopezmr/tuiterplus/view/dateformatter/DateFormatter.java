@@ -23,6 +23,14 @@ public class DateFormatter {
     this.dateFormats.add(dateFormat);
   }
 
+  /**
+   * Format Duration to String depends on the DateFormat objects.
+   *
+   * * Filter by results with String length > 0 (has result)
+   *
+   * @param duration
+   * @return
+   */
   public String format(Duration duration) {
     Optional<String> first = dateFormats.stream()
         .sorted(DateFormat::compareTo)

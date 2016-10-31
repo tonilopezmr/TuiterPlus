@@ -1,13 +1,13 @@
 package com.tonilopezmr.tuiterplus.usercases;
 
 import com.tonilopezmr.tuiterplus.model.post.Post;
+import com.tonilopezmr.tuiterplus.model.post.Timeline;
 import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.repository.InMemoryPosts;
 import com.tonilopezmr.tuiterplus.repository.InMemoryUsers;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
@@ -53,7 +53,7 @@ public class GetWallTimelineShould {
   get_wall_timeline_with_friends() {
     ReadWallTimeline readWallTimeline = getToniFollowsAlvaroAndRodrigoWall();
 
-    List<Post> timeline = readWallTimeline.getIt("Toni");
+    Timeline timeline = readWallTimeline.getIt("Toni");
 
     assertTrue(!timeline.isEmpty());
     assertThat(timeline.get(0).getPost(), is(RODRIGO_ANSWERS_TONI_AND_DO_A_BIT_OF_ADVERTISING));

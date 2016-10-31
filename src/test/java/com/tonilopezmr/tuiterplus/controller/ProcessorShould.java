@@ -3,7 +3,7 @@ package com.tonilopezmr.tuiterplus.controller;
 import com.tonilopezmr.tuiterplus.controller.commands.FollowCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.PostCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.WallCommand;
-import com.tonilopezmr.tuiterplus.model.post.Post;
+import com.tonilopezmr.tuiterplus.model.post.Timeline;
 import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.usercases.CreatePost;
 import com.tonilopezmr.tuiterplus.usercases.FollowUser;
@@ -13,7 +13,6 @@ import com.tonilopezmr.tuiterplus.view.printer.EmptyPrinter;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -102,7 +101,7 @@ public class ProcessorShould {
     }
 
     @Override
-    public List<Post> getIt(String userName) {
+    public Timeline getIt(String userName) {
       this.userName = userName;
       return null;
     }

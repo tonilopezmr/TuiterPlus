@@ -1,18 +1,17 @@
 package com.tonilopezmr.tuiterplus.controller.commands;
 
-import com.tonilopezmr.tuiterplus.model.post.Post;
+import com.tonilopezmr.tuiterplus.model.post.Timeline;
 import com.tonilopezmr.tuiterplus.usercases.ReadWallTimeline;
 import com.tonilopezmr.tuiterplus.view.Printer;
 
-import java.util.List;
 import java.util.regex.Matcher;
 
 public class WallCommand extends Command {
 
-  private Printer<List<Post>> printer;
+  private Printer<Timeline> printer;
   private ReadWallTimeline wallTimeline;
 
-  public WallCommand(String pattern, Printer<List<Post>> printer, ReadWallTimeline wallTimeline) {
+  public WallCommand(String pattern, Printer<Timeline> printer, ReadWallTimeline wallTimeline) {
     super(pattern);
     this.printer = printer;
     this.wallTimeline = wallTimeline;
@@ -21,7 +20,7 @@ public class WallCommand extends Command {
   @Override
   public Printer process() {
     Matcher matcher = getMatcher();
-    List<Post> timeline = wallTimeline.getIt(matcher.group(1));
+    Timeline timeline = wallTimeline.getIt(matcher.group(1));
     printer.load(timeline);
     return printer;
   }
