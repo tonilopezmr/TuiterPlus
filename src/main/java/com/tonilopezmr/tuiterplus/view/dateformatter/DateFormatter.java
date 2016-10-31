@@ -3,7 +3,6 @@ package com.tonilopezmr.tuiterplus.view.dateformatter;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * DateFormatter is a class to format Duration to String with a collection of DateFormat to choose one.
@@ -31,13 +30,13 @@ public class DateFormatter {
    * @return
    */
   public String format(Duration duration) {
-    Optional<String> first = dateFormats.stream()
+    String first = dateFormats.stream()
         .sorted(DateFormat::compareTo)
         .filter(it -> !it.format(duration).isEmpty())
         .map(dateFormat -> dateFormat.format(duration))
-        .findFirst();
+        .findFirst().get();
 
-    return first.get();
+    return first;
   }
 
 }

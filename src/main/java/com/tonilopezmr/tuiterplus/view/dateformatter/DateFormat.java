@@ -32,7 +32,7 @@ public abstract class DateFormat implements Comparable<DateFormat> {
     return count == 1 ? singular : plural;
   }
 
-  String format(long duration) {
+  public String format(long duration) {
     duration = Math.abs(duration);
     String output = singlePlural((int) duration, singular, plural);
 

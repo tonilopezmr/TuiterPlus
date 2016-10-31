@@ -1,5 +1,7 @@
-package com.tonilopezmr.tuiterplus.view.dateformatter;
+package com.tonilopezmr.tuiterplus.view.dateformatter.formats;
 
+
+import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormat;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
