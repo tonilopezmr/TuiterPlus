@@ -24,8 +24,8 @@ public class TuiterPlus {
 
   public static void main(String... args) {
     ServiceLocator.load(new ServiceLocator());
-    CommandLine commandLine = ServiceLocator.get().getCommandLine();
-    new TuiterPlus(commandLine).run();
+    TuiterPlus tuiterPlus = ServiceLocator.get().getTuiterPlus();
+    tuiterPlus.run();
   }
 
 }

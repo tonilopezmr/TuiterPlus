@@ -28,7 +28,6 @@ public class DateFormatterShould {
   public void
   return_difference_in_seconds_when_is_lower_than_a_minute() {
     DateFormatter dateFormatter = getDateFormatter();
-
     LocalDateTime after = LocalDateTime.now().minusSeconds(30);
     Duration duration = dateFormatter.diff(after);
 

@@ -16,9 +16,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class GetWallTimelineShould {
 
   public static final String FAMOUS_TONI_POST = "Hello Codurance!";
-  public static final String ALVARO_ANSWERS_POST = "@tonilopezmr please stop, you are very annoying with \"Hello Codurance!\"";
-  public static final String TONI_ANSWERS_REPENTANT_ALVARO_POST = "@alvarobiz sorry, was a @srodrigoDev idea";
-  public static final String RODRIGO_ANSWERS_TONI_AND_DO_A_BIT_OF_ADVERTISING = "@tonilopezmr @alvarobiz  hey hey that's a lie, watch my last kotlin kata bowling video";
+  public static final String ALVARO_ANSWERS_POST =
+      "@tonilopezmr please stop, you are very annoying with \"Hello Codurance!\"";
+  public static final String TONI_ANSWERS_REPENTANT_ALVARO_POST =
+      "@alvarobiz sorry, was a @srodrigoDev idea";
+  public static final String RODRIGO_ANSWERS_TONI_AND_DO_A_BIT_OF_ADVERTISING =
+      "@tonilopezmr @alvarobiz  hey hey that's a lie, watch my last kotlin kata bowling video";
 
   private UserRepository getUsers(User toni, User alvaro, User rodrigo) {
     InMemoryUsers users = new InMemoryUsers();
@@ -52,7 +55,7 @@ public class GetWallTimelineShould {
 
   @Test
   public void
-  get_wall_timeline_with_friends() {
+  get_wall_timeline_with_followers() {
     ReadWallTimeline readWallTimeline = getToniFollowsAlvaroAndRodrigoWall();
 
     Timeline timeline = readWallTimeline.getIt("Toni");

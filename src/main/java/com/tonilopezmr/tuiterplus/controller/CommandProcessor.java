@@ -34,6 +34,12 @@ public class CommandProcessor {
         .findFirst().get();
   }
 
+  /**
+   * Because always needs a command to exit.
+   *
+   * @param cmd command line
+   * @return true if the command is to exit
+   */
   public boolean exit(String cmd) {
     return cmd.equals(EXIT_COMMAND);
   }

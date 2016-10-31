@@ -48,10 +48,10 @@ public class ConsoleCLI implements View {
 
   @Override
   public void showFareWell() {
-    show("*************************************\n");
-    show("************** Bye Bye **************\n");
+    show("\n\n*************************************\n");
+    show("************** GoodBye **************\n");
     show("******** Tuiter+ tonilopezmr ********\n");
-    show("*************************************");
+    show("*************************************\n\n");
   }
 
   public void show(String message) {

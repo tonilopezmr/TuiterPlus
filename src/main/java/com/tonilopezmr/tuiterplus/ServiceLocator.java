@@ -2,14 +2,6 @@ package com.tonilopezmr.tuiterplus;
 
 import com.tonilopezmr.tuiterplus.controller.CommandLine;
 import com.tonilopezmr.tuiterplus.controller.CommandProcessor;
-import com.tonilopezmr.tuiterplus.controller.commands.Command;
-import com.tonilopezmr.tuiterplus.controller.commands.FollowCommand;
-import com.tonilopezmr.tuiterplus.controller.commands.PostCommand;
-import com.tonilopezmr.tuiterplus.controller.commands.ReadTimelineCommand;
-import com.tonilopezmr.tuiterplus.controller.commands.WallCommand;
-import com.tonilopezmr.tuiterplus.controller.printer.EmptyPrinter;
-import com.tonilopezmr.tuiterplus.controller.printer.TimelinePrinter;
-import com.tonilopezmr.tuiterplus.controller.printer.WallTimelinePrinter;
 import com.tonilopezmr.tuiterplus.model.TimeProvider;
 import com.tonilopezmr.tuiterplus.model.user.UserRepository;
 import com.tonilopezmr.tuiterplus.repository.InMemoryUsers;
@@ -19,15 +11,8 @@ import com.tonilopezmr.tuiterplus.usercases.ReadUserTimeline;
 import com.tonilopezmr.tuiterplus.usercases.ReadWallTimeline;
 import com.tonilopezmr.tuiterplus.view.ConsoleCLI;
 import com.tonilopezmr.tuiterplus.view.View;
-import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
-import com.tonilopezmr.tuiterplus.view.dateformatter.formats.DaysFormat;
-import com.tonilopezmr.tuiterplus.view.dateformatter.formats.HourFormat;
-import com.tonilopezmr.tuiterplus.view.dateformatter.formats.MinutesFormat;
-import com.tonilopezmr.tuiterplus.view.dateformatter.formats.SecondsFormat;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -48,13 +33,8 @@ public class ServiceLocator {
     return injector;
   }
 
-  public DateFormatter getDatterFormater() {
-    DateFormatter dateFormatter = new DateFormatter(getCreationTime());
-    dateFormatter.addDateFormat(new HourFormat("an hour", "%d hours"));
-    dateFormatter.addDateFormat(new SecondsFormat("a moment", "%d seconds"));
-    dateFormatter.addDateFormat(new DaysFormat("a day", "%d days"));
-    dateFormatter.addDateFormat(new MinutesFormat("a minute", "%d minutes"));
-    return dateFormatter;
+  public DataFormatterAssembler getDataFormatterAssembler() {
+    return new DataFormatterAssembler(getCreationTime());
   }
 
   public Scanner getScanner() {
@@ -70,7 +50,7 @@ public class ServiceLocator {
   }
 
   public View getView() {
-    return new ConsoleCLI(getScanner(), getPrintStream(), getDatterFormater());
+    return new ConsoleCLI(getScanner(), getPrintStream(), getDataFormatterAssembler().assemble());
   }
 
   public UserRepository getUserRepository() {
@@ -95,17 +75,12 @@ public class ServiceLocator {
     return new FollowUser(getUserRepository());
   }
 
-  public List<Command> getCommands() {
-    ArrayList<Command> commands = new ArrayList<>();
-    commands.add(new PostCommand(CommandProcessor.POST_COMMAND, new EmptyPrinter(), getCreatePostUseCase()));
-    commands.add(new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new EmptyPrinter(), getFollowUserUseCase()));
-    commands.add(new WallCommand(CommandProcessor.WALL_COMMAND, new WallTimelinePrinter(getView()), getWallTimelineUseCase()));
-    commands.add(new ReadTimelineCommand(CommandProcessor.READ_COMMAND, new TimelinePrinter(getView()), getPostsUseCase()));
-    return commands;
+  public CommandsAssembler commandsAssembler() {
+    return new CommandsAssembler(this);
   }
 
   public CommandProcessor getProcessor() {
-    return new CommandProcessor(getCommands());
+    return new CommandProcessor(commandsAssembler().assemble());
   }
 
   public CommandLine getCommandLine() {

@@ -21,7 +21,9 @@ public class InMemoryUsers implements UserRepository {
 
   @Override
   public Optional<User> get(String username) {
-    return userList.stream().filter(it -> it.getName().equals(username)).findFirst();
+    return userList.stream()
+        .filter(it -> it.getName().equals(username))
+        .findFirst();
   }
 
   @Override
