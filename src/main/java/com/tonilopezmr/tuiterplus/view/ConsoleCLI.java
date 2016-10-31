@@ -43,7 +43,7 @@ public class ConsoleCLI implements View {
     show("\treading: <user name>\n");
     show("\tfollowing: <user name> follows <another user>\n");
     show("\twall: <user name> wall\n");
-    show("\texit: exit\n\n\n");
+    show("\tto exit: exit \n\n\n");
   }
 
   @Override

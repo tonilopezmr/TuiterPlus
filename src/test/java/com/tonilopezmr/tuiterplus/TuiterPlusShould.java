@@ -31,11 +31,15 @@ public class TuiterPlusShould {
    * @return the expected output
    */
   private String getOutput(int index) {
-    Scanner scanner = new Scanner(out.toString().replace("> ", "\n"));
+    String output = out.toString();
+    output = output.substring(output.indexOf("exit"));
+    Scanner scanner = new Scanner(output.replace("> ", "\n"));
+
     String result = null;
-    for (int i = 0; i <= index && scanner.hasNextLine(); i++) {
+    for (int i = 0; i <= index+3 && scanner.hasNextLine(); i++) {
       result = scanner.nextLine();
     }
+
     return result;
   }
 
@@ -55,7 +59,7 @@ public class TuiterPlusShould {
     tuiterPlus.run();
 
     String output = getOutput(1);
-    assertThat(output, is("exit"));
+    assertThat(output, is("*************************************"));
   }
 
   @Test
