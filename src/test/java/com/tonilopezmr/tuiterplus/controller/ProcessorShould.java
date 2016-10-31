@@ -74,7 +74,7 @@ public class ProcessorShould {
     private String post;
 
     MockCreatePost() {
-      super(null, null);
+      super(null, null, null);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.tonilopezmr.tuiterplus.usercases;
 
+import com.tonilopezmr.tuiterplus.model.CreationTime;
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.repository.InMemoryPosts;
@@ -19,7 +20,7 @@ public class CreatePostShould {
   public void
   create_user_when_does_not_exist() {
     InMemoryUsers inMemoryUsers = new InMemoryUsers();    //To track the new user
-    CreatePost createPost = new CreatePost(inMemoryUsers, new InMemoryPosts());
+    CreatePost createPost = new CreatePost(inMemoryUsers, new InMemoryPosts(), new CreationTime());
 
     createPost.doIt("Toni", "Hello Codurance!");
 
@@ -32,7 +33,7 @@ public class CreatePostShould {
   public void
   create_post() {
     InMemoryPosts postRepository = new InMemoryPosts();
-    CreatePost createPost = new CreatePost(new InMemoryUsers(), postRepository);
+    CreatePost createPost = new CreatePost(new InMemoryUsers(), postRepository, new CreationTime());
 
     createPost.doIt("Toni", "Hello Codurance!");
 

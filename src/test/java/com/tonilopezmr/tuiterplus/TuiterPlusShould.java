@@ -62,7 +62,6 @@ public class TuiterPlusShould {
   public void
   show_user_posts_after_create_his_posts() {
     String commands = "Toni -> Hello Codurance!\n";
-    commands += "SomeBody\n";
     commands += "Toni -> Cat Cat\n";
     commands += "Toni\n";
     commands += "exit";
@@ -70,14 +69,15 @@ public class TuiterPlusShould {
     ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
         .scanner(willTypeLine(commands))
         .printStream(recordOutPut())
+        .creationTimeBeetweenPosts(100)
         .build();
 
     TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
     tuiterPlus.run();
 
-    String output = getOutput(4);
+    String output = getOutput(3);
     assertThat(output, is("Cat Cat (a moment ago)"));
-    output = getOutput(5);
+    output = getOutput(4);
     assertThat(output, is("Hello Codurance! (a moment ago)"));
   }
 
@@ -85,7 +85,6 @@ public class TuiterPlusShould {
   public void
   show_wall_after_user_follows_another_user_when_have_created_their_posts() {
     String commands = "Toni -> Hello Codurance!\n";
-    commands += "SomeCommand\n";
     commands += "Alvaro -> Hello Toni\n";
     commands += "Toni follows Alvaro\n";
     commands += "Toni wall\n";
@@ -94,14 +93,15 @@ public class TuiterPlusShould {
     ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
         .scanner(willTypeLine(commands))
         .printStream(recordOutPut())
+        .creationTimeBeetweenPosts(100)
         .build();
     TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
 
     tuiterPlus.run();
 
-    String output = getOutput(5);
+    String output = getOutput(4);
     assertThat(output, is("Alvaro - Hello Toni (a moment ago)"));
-    output = getOutput(6);
+    output = getOutput(5);
     assertThat(output, is("Toni - Hello Codurance! (a moment ago)"));
   }
 
