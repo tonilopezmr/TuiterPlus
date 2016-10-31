@@ -7,7 +7,7 @@ import com.tonilopezmr.tuiterplus.model.post.Timeline;
 import com.tonilopezmr.tuiterplus.usercases.CreatePost;
 import com.tonilopezmr.tuiterplus.usercases.FollowUser;
 import com.tonilopezmr.tuiterplus.usercases.ReadWallTimeline;
-import com.tonilopezmr.tuiterplus.view.Printer;
+import com.tonilopezmr.tuiterplus.controller.printer.Printer;
 import org.junit.Test;
 
 import java.util.Arrays;

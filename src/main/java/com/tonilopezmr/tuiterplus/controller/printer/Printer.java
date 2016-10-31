@@ -1,4 +1,4 @@
-package com.tonilopezmr.tuiterplus.view;
+package com.tonilopezmr.tuiterplus.controller.printer;
 
 /**
  * How a object it's printable

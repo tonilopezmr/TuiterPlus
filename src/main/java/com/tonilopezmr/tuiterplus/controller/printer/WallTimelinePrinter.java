@@ -1,9 +1,11 @@
 package com.tonilopezmr.tuiterplus.controller.printer;
 
 import com.tonilopezmr.tuiterplus.model.post.Timeline;
-import com.tonilopezmr.tuiterplus.view.Printer;
 import com.tonilopezmr.tuiterplus.view.View;
 
+/**
+ * Print wall timeline.
+ */
 public class WallTimelinePrinter implements Printer<Timeline> {
 
   private Timeline timeline;

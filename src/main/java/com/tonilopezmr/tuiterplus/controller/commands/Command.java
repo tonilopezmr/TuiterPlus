@@ -1,10 +1,13 @@
 package com.tonilopezmr.tuiterplus.controller.commands;
 
-import com.tonilopezmr.tuiterplus.view.Printer;
+import com.tonilopezmr.tuiterplus.controller.printer.Printer;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Command from CommandLine that do something and return a printer output.
+ */
 public abstract class Command {
 
   private String pattern;

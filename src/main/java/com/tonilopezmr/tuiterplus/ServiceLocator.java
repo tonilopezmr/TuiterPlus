@@ -8,7 +8,7 @@ import com.tonilopezmr.tuiterplus.controller.commands.PostCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.ReadTimelineCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.WallCommand;
 import com.tonilopezmr.tuiterplus.controller.printer.EmptyPrinter;
-import com.tonilopezmr.tuiterplus.controller.printer.PostsPrinter;
+import com.tonilopezmr.tuiterplus.controller.printer.TimelinePrinter;
 import com.tonilopezmr.tuiterplus.controller.printer.WallTimelinePrinter;
 import com.tonilopezmr.tuiterplus.model.TimeProvider;
 import com.tonilopezmr.tuiterplus.model.post.PostRepository;
@@ -109,7 +109,7 @@ public class ServiceLocator {
     commands.add(new PostCommand(CommandProcessor.POST_COMMAND, new EmptyPrinter(), getCreatePostUseCase()));
     commands.add(new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new EmptyPrinter(), getFollowUserUseCase()));
     commands.add(new WallCommand(CommandProcessor.WALL_COMMAND, new WallTimelinePrinter(getView()), getWallTimelineUseCase()));
-    commands.add(new ReadTimelineCommand(CommandProcessor.READ_COMMAND, new PostsPrinter(getView()), getPostsUseCase()));
+    commands.add(new ReadTimelineCommand(CommandProcessor.READ_COMMAND, new TimelinePrinter(getView()), getPostsUseCase()));
     return commands;
   }
 

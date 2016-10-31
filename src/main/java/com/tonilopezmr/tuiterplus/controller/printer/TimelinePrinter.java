@@ -1,15 +1,17 @@
 package com.tonilopezmr.tuiterplus.controller.printer;
 
 import com.tonilopezmr.tuiterplus.model.post.Timeline;
-import com.tonilopezmr.tuiterplus.view.Printer;
 import com.tonilopezmr.tuiterplus.view.View;
 
-public class PostsPrinter implements Printer<Timeline> {
+/**
+ * Print timeline when read user.
+ */
+public class TimelinePrinter implements Printer<Timeline> {
 
   private Timeline timeline;
   private View view;
 
-  public PostsPrinter(View view) {
+  public TimelinePrinter(View view) {
     this.view = view;
   }
 

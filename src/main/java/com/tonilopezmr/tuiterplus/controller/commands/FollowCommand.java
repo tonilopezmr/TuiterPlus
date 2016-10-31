@@ -2,7 +2,7 @@ package com.tonilopezmr.tuiterplus.controller.commands;
 
 import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.usercases.FollowUser;
-import com.tonilopezmr.tuiterplus.view.Printer;
+import com.tonilopezmr.tuiterplus.controller.printer.Printer;
 
 import java.util.regex.Matcher;
 

@@ -1,7 +1,5 @@
 package com.tonilopezmr.tuiterplus.controller.printer;
 
-import com.tonilopezmr.tuiterplus.view.Printer;
-
 public class EmptyPrinter implements Printer {
 
   @Override

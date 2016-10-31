@@ -1,6 +1,6 @@
 package com.tonilopezmr.tuiterplus.controller;
 
-import com.tonilopezmr.tuiterplus.view.Printer;
+import com.tonilopezmr.tuiterplus.controller.printer.Printer;
 import com.tonilopezmr.tuiterplus.view.View;
 
 /**
