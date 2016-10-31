@@ -1,6 +1,9 @@
 package com.tonilopezmr.tuiterplus.view.dateformatter;
 
+import com.tonilopezmr.tuiterplus.model.TimeProvider;
+
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +14,20 @@ import java.util.List;
  */
 public class DateFormatter {
 
+  private TimeProvider timeProvider;
   private List<DateFormat> dateFormats;
 
-  public DateFormatter() {
+  public DateFormatter(TimeProvider timeProvider) {
     this.dateFormats = new ArrayList<>();
+    this.timeProvider = timeProvider;
   }
 
   public void addDateFormat(DateFormat dateFormat) {
     this.dateFormats.add(dateFormat);
+  }
+
+  public Duration diff(LocalDateTime dateTime) {
+    return timeProvider.diffNow(dateTime);
   }
 
   /**

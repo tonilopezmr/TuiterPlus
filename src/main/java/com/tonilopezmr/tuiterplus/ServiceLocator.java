@@ -7,6 +7,9 @@ import com.tonilopezmr.tuiterplus.controller.commands.FollowCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.PostCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.ReadTimelineCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.WallCommand;
+import com.tonilopezmr.tuiterplus.controller.printer.EmptyPrinter;
+import com.tonilopezmr.tuiterplus.controller.printer.PostsPrinter;
+import com.tonilopezmr.tuiterplus.controller.printer.WallTimelinePrinter;
 import com.tonilopezmr.tuiterplus.model.TimeProvider;
 import com.tonilopezmr.tuiterplus.model.post.PostRepository;
 import com.tonilopezmr.tuiterplus.model.user.UserRepository;
@@ -23,9 +26,6 @@ import com.tonilopezmr.tuiterplus.view.dateformatter.formats.DaysFormat;
 import com.tonilopezmr.tuiterplus.view.dateformatter.formats.HourFormat;
 import com.tonilopezmr.tuiterplus.view.dateformatter.formats.MinutesFormat;
 import com.tonilopezmr.tuiterplus.view.dateformatter.formats.SecondsFormat;
-import com.tonilopezmr.tuiterplus.controller.printer.EmptyPrinter;
-import com.tonilopezmr.tuiterplus.controller.printer.PostsPrinter;
-import com.tonilopezmr.tuiterplus.controller.printer.WallTimelinePrinter;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class ServiceLocator {
   }
 
   public DateFormatter getDatterFormater() {
-    DateFormatter dateFormatter = new DateFormatter();
+    DateFormatter dateFormatter = new DateFormatter(getCreationTime());
     dateFormatter.addDateFormat(new HourFormat("an hour", "%d hours"));
     dateFormatter.addDateFormat(new SecondsFormat("a moment", "%d seconds"));
     dateFormatter.addDateFormat(new DaysFormat("a day", "%d days"));

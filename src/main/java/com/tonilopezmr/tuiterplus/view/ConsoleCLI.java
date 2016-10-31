@@ -7,7 +7,6 @@ import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
 
 import java.io.PrintStream;
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 /**
@@ -45,11 +44,8 @@ public class ConsoleCLI implements View {
   public void show(Timeline posts) {
     for (Post post : posts) {
 
-      LocalDateTime now = LocalDateTime.now();
-      LocalDateTime postDate = post.getDateTime();
-      Duration duration = Duration.between(postDate, now);
-
-      String result = dateFormatter.format(duration);
+      Duration diff = dateFormatter.diff(post.getDateTime());
+      String result = dateFormatter.format(diff);
 
       output.printf("%s (%s ago)\n", post.getPost(), result);
     }
@@ -59,11 +55,8 @@ public class ConsoleCLI implements View {
   public void showWallTimeline(Timeline posts) {
     for (Post post : posts) {
 
-      LocalDateTime now = LocalDateTime.now();
-      LocalDateTime postDate = post.getDateTime();
-      Duration duration = Duration.between(postDate, now);
-
-      String result = dateFormatter.format(duration);
+      Duration diff = dateFormatter.diff(post.getDateTime());
+      String result = dateFormatter.format(diff);
 
       User user = post.getUser();
       output.printf("%s - %s (%s ago)\n", user.getName(), post.getPost(), result);
