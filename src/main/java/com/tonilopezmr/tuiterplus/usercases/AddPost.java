@@ -28,12 +28,17 @@ public class AddPost {
     User user;
 
     if (!oUser.isPresent()) {
-      user = new User(userName);
-      userRepository.add(user);
+      user = createUser(userName);
     } else {
       user = oUser.get();
     }
 
+    return user;
+  }
+
+  private User createUser(String userName) {
+    User user = new User(userName);
+    userRepository.create(user);
     return user;
   }
 }

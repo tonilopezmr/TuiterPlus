@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * DateFormatter is a class to format Duration to String with a collection of DateFormat to choose one.
  * <p>
- * It is easy to add news DateFormat.
+ * It is easy to create news DateFormat.
  */
 public class DateFormatter {
 

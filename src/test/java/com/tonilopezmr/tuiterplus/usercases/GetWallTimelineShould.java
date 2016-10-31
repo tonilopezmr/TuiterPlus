@@ -25,9 +25,9 @@ public class GetWallTimelineShould {
 
   private UserRepository getUsers(User toni, User alvaro, User rodrigo) {
     InMemoryUsers users = new InMemoryUsers();
-    users.add(toni);
-    users.add(alvaro);
-    users.add(rodrigo);
+    users.create(toni);
+    users.create(alvaro);
+    users.create(rodrigo);
     toniFollowAlvaroAndRodrigo(toni, alvaro, rodrigo, users);
     addPosts(toni, alvaro, rodrigo, users);
     return users;

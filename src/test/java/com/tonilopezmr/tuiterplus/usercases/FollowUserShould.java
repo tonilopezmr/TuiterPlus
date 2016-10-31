@@ -17,8 +17,8 @@ public class FollowUserShould {
     UserRepository users = new InMemoryUsers();
     User toni = new User("Toni");
     User rodrigo = new User("Rodrigo");
-    users.add(toni);
-    users.add(rodrigo);
+    users.create(toni);
+    users.create(rodrigo);
     return users;
   }
 
