@@ -4,7 +4,7 @@ import com.tonilopezmr.tuiterplus.controller.commands.FollowCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.PostCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.WallCommand;
 import com.tonilopezmr.tuiterplus.model.post.Timeline;
-import com.tonilopezmr.tuiterplus.usercases.CreatePost;
+import com.tonilopezmr.tuiterplus.usercases.AddPost;
 import com.tonilopezmr.tuiterplus.usercases.FollowUser;
 import com.tonilopezmr.tuiterplus.usercases.ReadWallTimeline;
 import com.tonilopezmr.tuiterplus.controller.printer.Printer;
@@ -21,7 +21,7 @@ public class CommandProcessorShould {
   @Test
   public void
   get_user_and_post_arguments_when_post() {
-    MockCreatePost mockCreatePost = new MockCreatePost();  //To intercept arguments
+    MockAddPost mockCreatePost = new MockAddPost();  //To intercept arguments
     MyCustomPrinter customPrinter = new MyCustomPrinter();
     PostCommand postCommand = new PostCommand(CommandProcessor.POST_COMMAND, customPrinter, mockCreatePost);
     CommandProcessor processor = new CommandProcessor(Arrays.asList(postCommand));
@@ -85,13 +85,13 @@ public class CommandProcessorShould {
     assertThat(printer, instanceOf(MyCustomPrinter.class));
   }
 
-  private class MockCreatePost extends CreatePost {
+  private class MockAddPost extends AddPost {
 
     private String userName;
     private String post;
 
-    MockCreatePost() {
-      super(null, null, null);
+    MockAddPost() {
+      super(null, null);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class CommandProcessorShould {
     private String userName;
 
     MockReadWall() {
-      super(null, null);
+      super(null);
     }
 
     @Override

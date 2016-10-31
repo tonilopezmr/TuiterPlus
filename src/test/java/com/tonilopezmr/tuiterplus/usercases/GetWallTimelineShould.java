@@ -3,7 +3,7 @@ package com.tonilopezmr.tuiterplus.usercases;
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.post.Timeline;
 import com.tonilopezmr.tuiterplus.model.user.User;
-import com.tonilopezmr.tuiterplus.repository.InMemoryPosts;
+import com.tonilopezmr.tuiterplus.model.user.UserRepository;
 import com.tonilopezmr.tuiterplus.repository.InMemoryUsers;
 import org.junit.Test;
 
@@ -20,32 +20,34 @@ public class GetWallTimelineShould {
   public static final String TONI_ANSWERS_REPENTANT_ALVARO_POST = "@alvarobiz sorry, was a @srodrigoDev idea";
   public static final String RODRIGO_ANSWERS_TONI_AND_DO_A_BIT_OF_ADVERTISING = "@tonilopezmr @alvarobiz  hey hey that's a lie, watch my last kotlin kata bowling video";
 
-  private InMemoryUsers getUsers(User toni, User alvaro, User rodrigo) {
+  private UserRepository getUsers(User toni, User alvaro, User rodrigo) {
     InMemoryUsers users = new InMemoryUsers();
-    users.create(toni);
-    users.create(alvaro);
-    users.create(rodrigo);
-    users.follow(toni, alvaro);
-    users.follow(toni, rodrigo);
+    users.add(toni);
+    users.add(alvaro);
+    users.add(rodrigo);
+    toniFollowAlvaroAndRodrigo(toni, alvaro, rodrigo, users);
+    addPosts(toni, alvaro, rodrigo, users);
     return users;
   }
 
-  private InMemoryPosts getPosts(User toni, User alvaro, User rodrigo) {
-    InMemoryPosts posts = new InMemoryPosts();
-    posts.create(new Post(toni, FAMOUS_TONI_POST, LocalDateTime.now().minusHours(2)));
-    posts.create(new Post(alvaro, ALVARO_ANSWERS_POST, LocalDateTime.now().minusMinutes(32)));
-    posts.create(new Post(toni, TONI_ANSWERS_REPENTANT_ALVARO_POST, LocalDateTime.now().minusMinutes(29)));
-    posts.create(new Post(rodrigo, RODRIGO_ANSWERS_TONI_AND_DO_A_BIT_OF_ADVERTISING, LocalDateTime.now().minusSeconds(1)));
-    return posts;
+  private void toniFollowAlvaroAndRodrigo(User toni, User alvaro, User rodrigo, InMemoryUsers users) {
+    users.follow(toni, alvaro);
+    users.follow(toni, rodrigo);
+  }
+
+  private void addPosts(User toni, User alvaro, User rodrigo, InMemoryUsers users) {
+    users.add(new Post(toni, FAMOUS_TONI_POST, LocalDateTime.now().minusHours(2)));
+    users.add(new Post(alvaro, ALVARO_ANSWERS_POST, LocalDateTime.now().minusMinutes(32)));
+    users.add(new Post(toni, TONI_ANSWERS_REPENTANT_ALVARO_POST, LocalDateTime.now().minusMinutes(29)));
+    users.add(new Post(rodrigo, RODRIGO_ANSWERS_TONI_AND_DO_A_BIT_OF_ADVERTISING, LocalDateTime.now().minusSeconds(1)));
   }
 
   private ReadWallTimeline getToniFollowsAlvaroAndRodrigoWall() {
     User toni = new User("Toni");
     User alvaro = new User("Alvaro");
     User rodrigo = new User("Rodrigo");
-    InMemoryUsers users = getUsers(toni, alvaro, rodrigo);
-    InMemoryPosts posts = getPosts(toni, alvaro, rodrigo);
-    return new ReadWallTimeline(users, posts);
+    UserRepository users = getUsers(toni, alvaro, rodrigo);
+    return new ReadWallTimeline(users);
   }
 
   @Test

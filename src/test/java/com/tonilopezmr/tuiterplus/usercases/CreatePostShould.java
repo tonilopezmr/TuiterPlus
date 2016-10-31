@@ -3,7 +3,6 @@ package com.tonilopezmr.tuiterplus.usercases;
 import com.tonilopezmr.tuiterplus.model.TimeProvider;
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.user.User;
-import com.tonilopezmr.tuiterplus.repository.InMemoryPosts;
 import com.tonilopezmr.tuiterplus.repository.InMemoryUsers;
 import org.junit.Test;
 
@@ -20,9 +19,9 @@ public class CreatePostShould {
   public void
   create_user_when_does_not_exist() {
     InMemoryUsers inMemoryUsers = new InMemoryUsers();    //To track the new user
-    CreatePost createPost = new CreatePost(inMemoryUsers, new InMemoryPosts(), new TimeProvider());
+    AddPost addPost = new AddPost(inMemoryUsers, new TimeProvider());
 
-    createPost.doIt("Toni", "Hello Codurance!");
+    addPost.doIt("Toni", "Hello Codurance!");
 
     Optional<User> optional = inMemoryUsers.get("Toni");
     assertTrue(optional.isPresent());
@@ -32,12 +31,12 @@ public class CreatePostShould {
   @Test
   public void
   create_post() {
-    InMemoryPosts postRepository = new InMemoryPosts();
-    CreatePost createPost = new CreatePost(new InMemoryUsers(), postRepository, new TimeProvider());
+    InMemoryUsers userRepository = new InMemoryUsers();
+    AddPost addPost = new AddPost(userRepository, new TimeProvider());
 
-    createPost.doIt("Toni", "Hello Codurance!");
+    addPost.doIt("Toni", "Hello Codurance!");
 
-    List<Post> posts = postRepository.getPostsBy(new User("Toni"));
+    List<Post> posts = userRepository.getPostsBy(new User("Toni"));
     assertTrue(!posts.isEmpty());
     assertThat(posts.get(0).getPost(), is("Hello Codurance!"));
   }

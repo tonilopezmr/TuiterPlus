@@ -2,35 +2,37 @@ package com.tonilopezmr.tuiterplus.usercases;
 
 import com.tonilopezmr.tuiterplus.model.TimeProvider;
 import com.tonilopezmr.tuiterplus.model.post.Post;
-import com.tonilopezmr.tuiterplus.model.post.PostRepository;
 import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.model.user.UserRepository;
 
 import java.util.Optional;
 
-public class CreatePost {
+public class AddPost {
 
   private UserRepository userRepository;
-  private PostRepository postRepository;
   private TimeProvider localDateTime;
 
-  public CreatePost(UserRepository userRepository, PostRepository postRepository, TimeProvider localDateTime) {
+  public AddPost(UserRepository userRepository, TimeProvider localDateTime) {
     this.userRepository = userRepository;
-    this.postRepository = postRepository;
     this.localDateTime = localDateTime;
   }
 
   public void doIt(String userName, String post) {
+    User user = getUser(userName);
+
+    userRepository.add(new Post(user, post, localDateTime.timeNow()));
+  }
+
+  private User getUser(String userName) {
     Optional<User> oUser = userRepository.get(userName);
     User user;
 
     if (!oUser.isPresent()) {
       user = new User(userName);
-      userRepository.create(user);
+      userRepository.add(user);
     } else {
       user = oUser.get();
     }
-
-    postRepository.create(new Post(user, post, localDateTime.timeNow()));
+    return user;
   }
 }

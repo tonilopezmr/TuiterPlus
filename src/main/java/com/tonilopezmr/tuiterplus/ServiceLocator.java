@@ -11,11 +11,9 @@ import com.tonilopezmr.tuiterplus.controller.printer.EmptyPrinter;
 import com.tonilopezmr.tuiterplus.controller.printer.TimelinePrinter;
 import com.tonilopezmr.tuiterplus.controller.printer.WallTimelinePrinter;
 import com.tonilopezmr.tuiterplus.model.TimeProvider;
-import com.tonilopezmr.tuiterplus.model.post.PostRepository;
 import com.tonilopezmr.tuiterplus.model.user.UserRepository;
-import com.tonilopezmr.tuiterplus.repository.InMemoryPosts;
 import com.tonilopezmr.tuiterplus.repository.InMemoryUsers;
-import com.tonilopezmr.tuiterplus.usercases.CreatePost;
+import com.tonilopezmr.tuiterplus.usercases.AddPost;
 import com.tonilopezmr.tuiterplus.usercases.FollowUser;
 import com.tonilopezmr.tuiterplus.usercases.ReadUserTimeline;
 import com.tonilopezmr.tuiterplus.usercases.ReadWallTimeline;
@@ -40,7 +38,6 @@ import java.util.Scanner;
 public class ServiceLocator {
 
   private static ServiceLocator injector;
-  private PostRepository postRepository;
   private UserRepository userRepository;
 
   public static void load(ServiceLocator serviceLocator) {
@@ -76,28 +73,22 @@ public class ServiceLocator {
     return new ConsoleCLI(getScanner(), getPrintStream(), getDatterFormater());
   }
 
-  public PostRepository getPostRepository() {
-    if (postRepository == null) postRepository = new InMemoryPosts();
-
-    return postRepository;
-  }
-
   public UserRepository getUserRepository() {
     if (userRepository == null) userRepository = new InMemoryUsers();
 
     return userRepository;
   }
 
-  public CreatePost getCreatePostUseCase() {
-    return new CreatePost(getUserRepository(), getPostRepository(), getCreationTime());
+  public AddPost getCreatePostUseCase() {
+    return new AddPost(getUserRepository(), getCreationTime());
   }
 
   public ReadUserTimeline getPostsUseCase() {
-    return new ReadUserTimeline(getPostRepository());
+    return new ReadUserTimeline(getUserRepository());
   }
 
   public ReadWallTimeline getWallTimelineUseCase() {
-    return new ReadWallTimeline(getUserRepository(), getPostRepository());
+    return new ReadWallTimeline(getUserRepository());
   }
 
   public FollowUser getFollowUserUseCase() {

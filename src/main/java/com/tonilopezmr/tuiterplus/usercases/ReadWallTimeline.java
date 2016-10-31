@@ -1,7 +1,6 @@
 package com.tonilopezmr.tuiterplus.usercases;
 
 import com.tonilopezmr.tuiterplus.model.post.Post;
-import com.tonilopezmr.tuiterplus.model.post.PostRepository;
 import com.tonilopezmr.tuiterplus.model.post.Timeline;
 import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.model.user.UserRepository;
@@ -11,12 +10,10 @@ import java.util.Optional;
 
 public class ReadWallTimeline {
 
-  private PostRepository postRepository;
   private UserRepository userRepository;
 
-  public ReadWallTimeline(UserRepository userRepository, PostRepository postRepository) {
+  public ReadWallTimeline(UserRepository userRepository) {
     this.userRepository = userRepository;
-    this.postRepository = postRepository;
   }
 
   public Timeline getIt(String userName) {
@@ -25,9 +22,9 @@ public class ReadWallTimeline {
 
     if (oUser.isPresent()) {
       User user = oUser.get();
-      timeline.addAll(postRepository.getPostsBy(user));
+      timeline.addAll(userRepository.getPostsBy(user));
       for (User friend : user.getFollowing()) {
-        List<Post> friendPosts = postRepository.getPostsBy(friend);
+        List<Post> friendPosts = userRepository.getPostsBy(friend);
         timeline.addAll(friendPosts);
       }
     }

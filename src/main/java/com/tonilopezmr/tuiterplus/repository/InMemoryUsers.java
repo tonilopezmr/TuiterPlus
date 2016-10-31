@@ -1,18 +1,22 @@
 package com.tonilopezmr.tuiterplus.repository;
 
+import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.model.user.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class InMemoryUsers implements UserRepository {
 
   private List<User> userList;
+  private List<Post> postList;
 
   public InMemoryUsers() {
     this.userList = new ArrayList<>();
+    this.postList = new ArrayList<>();
   }
 
   @Override
@@ -21,7 +25,7 @@ public class InMemoryUsers implements UserRepository {
   }
 
   @Override
-  public void create(User user) {
+  public void add(User user) {
     userList.add(user);
   }
 
@@ -34,4 +38,17 @@ public class InMemoryUsers implements UserRepository {
       user.addFollow(followed);
     }
   }
+
+  @Override
+  public List<Post> getPostsBy(User user) {
+    return postList.stream()
+        .filter(it -> it.getUser().equals(user))
+        .collect(Collectors.toList());
+  }
+
+  @Override
+  public void add(Post post) {
+    postList.add(post);
+  }
+
 }
