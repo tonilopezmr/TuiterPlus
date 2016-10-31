@@ -23,6 +23,6 @@ public class ReadTimelineCommand extends Command {
     Matcher matcher = getMatcher();
     List<Post> timeline = readUserTimeline.getIt(matcher.group(1));
     printer.load(timeline);
-    return null;
+    return printer;
   }
 }

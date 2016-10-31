@@ -4,15 +4,18 @@ import com.tonilopezmr.tuiterplus.controller.commands.FollowCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.PostCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.WallCommand;
 import com.tonilopezmr.tuiterplus.model.post.Post;
+import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.usercases.CreatePost;
 import com.tonilopezmr.tuiterplus.usercases.FollowUser;
 import com.tonilopezmr.tuiterplus.usercases.ReadWallTimeline;
+import com.tonilopezmr.tuiterplus.view.Printer;
 import com.tonilopezmr.tuiterplus.view.printer.EmptyPrinter;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -53,6 +56,17 @@ public class ProcessorShould {
 
     assertThat(mockFollowUser.getFollower(), is("Toni"));
     assertThat(mockFollowUser.getFollowed(), is("Rodrigo"));
+  }
+
+  @Test public void
+  return_a_expected_printer_when_follows(){
+    MockFollowUser mockFollowUser = new MockFollowUser();
+    FollowCommand followCommand = new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new MyFollowCustomPrinter(), mockFollowUser);
+    CommandProcessor processor = new CommandProcessor(Arrays.asList(followCommand));
+
+    Printer printer = processor.process(String.format("Toni %s Rodrigo", CommandProcessor.FOLLOWS));
+
+    assertThat(printer, instanceOf(MyFollowCustomPrinter.class));
   }
 
   private class MockCreatePost extends CreatePost {
@@ -119,6 +133,18 @@ public class ProcessorShould {
 
     public String getFollowed() {
       return followed;
+    }
+  }
+
+  private class MyFollowCustomPrinter implements Printer<User> {
+    @Override
+    public void print() {
+
+    }
+
+    @Override
+    public void load(User printable) {
+
     }
   }
 }

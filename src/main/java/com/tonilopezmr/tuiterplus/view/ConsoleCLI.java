@@ -1,6 +1,7 @@
 package com.tonilopezmr.tuiterplus.view;
 
 import com.tonilopezmr.tuiterplus.model.post.Post;
+import com.tonilopezmr.tuiterplus.model.user.User;
 import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
 
 import java.io.PrintStream;
@@ -50,7 +51,22 @@ public class ConsoleCLI implements View {
 
       String result = dateFormatter.format(duration);
 
-      output.printf(post.getPost() + " (%s ago)\n", result);
+      output.printf("%s (%s ago)\n", post.getPost(), result);
+    }
+  }
+
+  @Override
+  public void showWallTimeline(List<Post> posts) {
+    for (Post post : posts) {
+
+      LocalDateTime now = LocalDateTime.now();
+      LocalDateTime postDate = post.getDateTime();
+      Duration duration = Duration.between(postDate, now);
+
+      String result = dateFormatter.format(duration);
+
+      User user = post.getUser();
+      output.printf("%s - %s (%s ago)\n", user.getName(), post.getPost(), result);
     }
   }
 

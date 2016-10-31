@@ -67,7 +67,7 @@ public class ServiceLocator {
     return System.out;
   }
 
-  public View getConsoleCLI() {
+  public View getView() {
     return new ConsoleCLI(getScanner(), getPrintStream(), getDatterFormater());
   }
 
@@ -103,8 +103,8 @@ public class ServiceLocator {
     ArrayList<Command> commands = new ArrayList<>();
     commands.add(new PostCommand(CommandProcessor.POST_COMMAND, new EmptyPrinter(), getCreatePostUseCase()));
     commands.add(new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new EmptyPrinter(), getFollowUserUseCase()));
-    commands.add(new WallCommand(CommandProcessor.WALL_COMMAND, new WallTimelinePrinter(), getWallTimelineUseCase()));
-    commands.add(new ReadTimelineCommand(CommandProcessor.READ_COMMAND, new PostsPrinter(), getPostsUseCase()));
+    commands.add(new WallCommand(CommandProcessor.WALL_COMMAND, new WallTimelinePrinter(getView()), getWallTimelineUseCase()));
+    commands.add(new ReadTimelineCommand(CommandProcessor.READ_COMMAND, new PostsPrinter(getView()), getPostsUseCase()));
     return commands;
   }
 
@@ -113,7 +113,7 @@ public class ServiceLocator {
   }
 
   public CommandLine getCommandLine() {
-    return new CommandLine(getConsoleCLI(), getProcessor());
+    return new CommandLine(getView(), getProcessor());
   }
 
   public TuiterPlus getTuiterPlus() {

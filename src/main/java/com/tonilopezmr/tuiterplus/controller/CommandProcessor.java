@@ -27,15 +27,11 @@ public class CommandProcessor {
   }
 
   public Printer process(String cmd) {
-    Printer printer = null;
 
-    for (Command command : commands) {
-      if (command.matches(cmd)) {
-        printer = command.process();
-      }
-    }
-
-    return printer;
+    return commands.stream()
+        .filter(it -> it.matches(cmd))
+        .map(it -> it.process())
+        .findFirst().get();
   }
 
   public boolean exit(String cmd) {

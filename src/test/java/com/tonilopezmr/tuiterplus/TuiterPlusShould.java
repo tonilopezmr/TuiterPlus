@@ -1,13 +1,10 @@
 package com.tonilopezmr.tuiterplus;
 
 import com.tonilopezmr.tuiterplus.controller.CommandProcessor;
-import com.tonilopezmr.tuiterplus.model.post.Post;
-import com.tonilopezmr.tuiterplus.model.user.User;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -40,11 +37,6 @@ public class TuiterPlusShould {
       result = scanner.nextLine();
     }
     return result;
-  }
-
-  private Post getToniPostTwoMinutesAgo() {
-    User toni = new User("Toni");
-    return new Post(toni, "Hello Codurance!", LocalDateTime.now().minusMinutes(2));
   }
 
   private PrintStream recordOutPut() {
@@ -91,8 +83,9 @@ public class TuiterPlusShould {
 
   @Test
   public void
-  user_follows_another_user_after_create_their_posts() {
+  show_wall_after_user_follows_another_user_when_have_created_their_posts() {
     String commands = "Toni -> Hello Codurance!\n";
+    commands += "SomeCommand\n";
     commands += "Alvaro -> Hello Toni\n";
     commands += "Toni follows Alvaro\n";
     commands += "Toni wall\n";
@@ -106,10 +99,10 @@ public class TuiterPlusShould {
 
     tuiterPlus.run();
 
-    String output = getOutput(4);
-    assertThat(output, is("Hello Toni (a moment ago)"));
-    output = getOutput(5);
-    assertThat(output, is("Hello Codurance! (a moment ago)"));
+    String output = getOutput(5);
+    assertThat(output, is("Alvaro - Hello Toni (a moment ago)"));
+    output = getOutput(6);
+    assertThat(output, is("Toni - Hello Codurance! (a moment ago)"));
   }
 
 }

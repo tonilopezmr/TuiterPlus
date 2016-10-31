@@ -13,5 +13,6 @@ public interface View {
   String readCommandLine();
   void showFareWell();
   void show(List<Post> posts);
+  void showWallTimeline(List<Post> posts);
 
 }
