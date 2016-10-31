@@ -81,4 +81,9 @@ public class ConsoleCLI implements View {
     }
   }
 
+  @Override
+  public void showUnfollow(User user) {
+    output.print(user.getName() + " has been unfollow\n");
+  }
+
 }

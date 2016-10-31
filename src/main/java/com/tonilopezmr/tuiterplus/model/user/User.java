@@ -21,6 +21,10 @@ public class User {
     return new ArrayList<User>(following);
   }
 
+  public void unFollow(User user){
+    this.following.remove(user);
+  }
+
   public void addFollow(User followed) {
     this.following.add(followed);
   }
@@ -33,7 +37,6 @@ public class User {
     User user = (User) o;
 
     return name.equals(user.name);
-
   }
 
   @Override

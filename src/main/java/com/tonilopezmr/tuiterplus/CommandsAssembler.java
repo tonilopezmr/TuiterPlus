@@ -5,14 +5,17 @@ import com.tonilopezmr.tuiterplus.controller.commands.Command;
 import com.tonilopezmr.tuiterplus.controller.commands.FollowCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.PostCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.ReadTimelineCommand;
+import com.tonilopezmr.tuiterplus.controller.commands.UnfollowCommand;
 import com.tonilopezmr.tuiterplus.controller.commands.WallCommand;
 import com.tonilopezmr.tuiterplus.controller.printer.EmptyPrinter;
 import com.tonilopezmr.tuiterplus.controller.printer.TimelinePrinter;
+import com.tonilopezmr.tuiterplus.controller.printer.UnfollowPrinter;
 import com.tonilopezmr.tuiterplus.controller.printer.WallTimelinePrinter;
 import com.tonilopezmr.tuiterplus.usercases.AddPost;
 import com.tonilopezmr.tuiterplus.usercases.FollowUser;
 import com.tonilopezmr.tuiterplus.usercases.ReadUserTimeline;
 import com.tonilopezmr.tuiterplus.usercases.ReadWallTimeline;
+import com.tonilopezmr.tuiterplus.usercases.UnfollowUser;
 import com.tonilopezmr.tuiterplus.view.View;
 
 import java.util.ArrayList;
@@ -32,11 +35,13 @@ public class CommandsAssembler {
     FollowUser followUserUseCase = serviceLocator.getFollowUserUseCase();
     ReadWallTimeline wallTimelineUseCase = serviceLocator.getWallTimelineUseCase();
     ReadUserTimeline postsUseCase = serviceLocator.getPostsUseCase();
+    UnfollowUser unfollow = new UnfollowUser(serviceLocator.getUserRepository());
 
     ArrayList<Command> commands = new ArrayList<>();
     commands.add(new PostCommand(CommandProcessor.POST_COMMAND, new EmptyPrinter(), createPostUseCase));
     commands.add(new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new EmptyPrinter(), followUserUseCase));
     commands.add(new WallCommand(CommandProcessor.WALL_COMMAND, new WallTimelinePrinter(view), wallTimelineUseCase));
+    commands.add(new UnfollowCommand(CommandProcessor.UNFOLLOW_COMMAND, new UnfollowPrinter(view), unfollow));
     commands.add(new ReadTimelineCommand(CommandProcessor.READ_COMMAND, new TimelinePrinter(view), postsUseCase));
     return commands;
   }

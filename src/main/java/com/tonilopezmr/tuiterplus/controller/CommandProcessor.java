@@ -19,6 +19,7 @@ public class CommandProcessor {
   public static final String WALL_COMMAND = String.format("(.*) %s", WALL);
   public static final String EXIT_COMMAND = "exit";
   public static final String READ_COMMAND = "(.*)";
+  public static final String UNFOLLOW_COMMAND = String.format("(.*) %s (.*)", "unfollows");
 
   private List<Command> commands;
 
