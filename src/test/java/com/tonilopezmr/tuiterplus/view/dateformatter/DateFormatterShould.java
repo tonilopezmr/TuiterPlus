@@ -1,10 +1,7 @@
 package com.tonilopezmr.tuiterplus.view.dateformatter;
 
+import com.tonilopezmr.tuiterplus.DataFormatterAssembler;
 import com.tonilopezmr.tuiterplus.model.TimeProvider;
-import com.tonilopezmr.tuiterplus.view.dateformatter.formats.DaysFormat;
-import com.tonilopezmr.tuiterplus.view.dateformatter.formats.HourFormat;
-import com.tonilopezmr.tuiterplus.view.dateformatter.formats.MinutesFormat;
-import com.tonilopezmr.tuiterplus.view.dateformatter.formats.SecondsFormat;
 import org.junit.Test;
 
 import java.time.Duration;
@@ -16,12 +13,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class DateFormatterShould {
 
   private DateFormatter getDateFormatter() {
-    DateFormatter dateFormatter = new DateFormatter(new TimeProvider());
-    dateFormatter.addDateFormat(new HourFormat("an hour", "%d hours"));
-    dateFormatter.addDateFormat(new SecondsFormat("a moment", "%d seconds"));
-    dateFormatter.addDateFormat(new MinutesFormat("a minute", "%d minutes"));
-    dateFormatter.addDateFormat(new DaysFormat("a day", "%d days"));
-    return dateFormatter;
+    DataFormatterAssembler assembler = new DataFormatterAssembler(new TimeProvider());
+    return assembler.assemble();
   }
 
   @Test
