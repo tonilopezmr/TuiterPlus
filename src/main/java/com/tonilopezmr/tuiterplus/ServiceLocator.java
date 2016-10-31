@@ -23,9 +23,9 @@ import com.tonilopezmr.tuiterplus.view.dateformatter.formats.DaysFormat;
 import com.tonilopezmr.tuiterplus.view.dateformatter.formats.HourFormat;
 import com.tonilopezmr.tuiterplus.view.dateformatter.formats.MinutesFormat;
 import com.tonilopezmr.tuiterplus.view.dateformatter.formats.SecondsFormat;
-import com.tonilopezmr.tuiterplus.view.printer.EmptyPrinter;
-import com.tonilopezmr.tuiterplus.view.printer.PostsPrinter;
-import com.tonilopezmr.tuiterplus.view.printer.WallTimelinePrinter;
+import com.tonilopezmr.tuiterplus.controller.printer.EmptyPrinter;
+import com.tonilopezmr.tuiterplus.controller.printer.PostsPrinter;
+import com.tonilopezmr.tuiterplus.controller.printer.WallTimelinePrinter;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
