@@ -18,6 +18,10 @@ public class CommandLine {
     this.processor = processor;
   }
 
+  public void start() {
+    view.showWelcome();
+  }
+
   public void resume() {
     view.showPrompt();
     String commandLine = view.readCommandLine();

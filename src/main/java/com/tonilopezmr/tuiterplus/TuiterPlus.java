@@ -14,6 +14,7 @@ public class TuiterPlus {
   }
 
   public void run() {
+    commandLine.start();
 
     while (!commandLine.isExit()) {
       commandLine.resume();

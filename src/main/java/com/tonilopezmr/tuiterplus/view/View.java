@@ -7,9 +7,10 @@ import com.tonilopezmr.tuiterplus.model.post.Timeline;
  */
 public interface View {
 
+  void showWelcome();
+  void showFareWell();
   void showPrompt();
   String readCommandLine();
-  void showFareWell();
   void show(Timeline timeline);
   void showWallTimeline(Timeline posts);
 
