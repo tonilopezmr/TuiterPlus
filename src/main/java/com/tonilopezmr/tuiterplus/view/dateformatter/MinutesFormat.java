@@ -5,10 +5,6 @@ import java.time.temporal.ChronoUnit;
 
 public class MinutesFormat extends DateFormat {
 
-  public MinutesFormat(String minutes) {
-    super(ChronoUnit.MINUTES.getDuration().getSeconds(), minutes);
-  }
-
   public MinutesFormat(String singular, String plural) {
     super(ChronoUnit.MINUTES.getDuration().getSeconds(), singular, plural);
   }

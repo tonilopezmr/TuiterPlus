@@ -1,11 +1,16 @@
 package com.tonilopezmr.tuiterplus.controller;
 
+import com.tonilopezmr.tuiterplus.controller.commands.FollowCommand;
+import com.tonilopezmr.tuiterplus.controller.commands.PostCommand;
+import com.tonilopezmr.tuiterplus.controller.commands.WallCommand;
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.usercases.CreatePost;
 import com.tonilopezmr.tuiterplus.usercases.FollowUser;
-import com.tonilopezmr.tuiterplus.usercases.GetWallTimeline;
+import com.tonilopezmr.tuiterplus.usercases.ReadWallTimeline;
+import com.tonilopezmr.tuiterplus.view.printer.EmptyPrinter;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -17,9 +22,10 @@ public class ProcessorShould {
   public void
   get_user_and_post_arguments_when_post() {
     MockCreatePost mockCreatePost = new MockCreatePost();  //To intercept arguments
-    Processor processor = new Processor(null, mockCreatePost, null, null);
+    PostCommand postCommand = new PostCommand(Processor.POST_COMMAND, new EmptyPrinter(), mockCreatePost);
+    Processor processor = new Processor(Arrays.asList(postCommand));
 
-    processor.process(String.format("Toni %s Hello Codurance!", Processor.POST_COMMAND));
+    processor.process(String.format("Toni %s Hello Codurance!", Processor.POST));
 
     assertThat(mockCreatePost.getUserNameArg(), is("Toni"));
     assertThat(mockCreatePost.getPostArg(), is("Hello Codurance!"));
@@ -27,10 +33,11 @@ public class ProcessorShould {
 
   @Test public void
   get_user_argument_when_get_wall(){
-    MockGetWall mockGetWall = new MockGetWall();
-    Processor processor = new Processor(null, null, mockGetWall, null);
+    MockReadWall mockGetWall = new MockReadWall();
+    WallCommand wallCommand = new WallCommand(Processor.WALL_COMMAND, new EmptyPrinter(), mockGetWall);
+    Processor processor = new Processor(Arrays.asList(wallCommand));
 
-    processor.process(String.format("Toni %s", Processor.WALL_COMMAND));
+    processor.process(String.format("Toni %s", Processor.WALL));
 
     assertThat(mockGetWall.getUserNameArg(), is("Toni"));
   }
@@ -39,9 +46,10 @@ public class ProcessorShould {
   public void
   get_follower_and_followed_arguments_when_user_follows() {
     MockFollowUser mockFollowUser = new MockFollowUser();
-    Processor processor = new Processor(null, null, null, mockFollowUser);
+    FollowCommand followCommand = new FollowCommand(Processor.FOLLOW_COMMAND, new EmptyPrinter(), mockFollowUser);
+    Processor processor = new Processor(Arrays.asList(followCommand));
 
-    processor.process(String.format("Toni %s Rodrigo", Processor.FOLLOW_COMMAND));
+    processor.process(String.format("Toni %s Rodrigo", Processor.FOLLOWS));
 
     assertThat(mockFollowUser.getFollower(), is("Toni"));
     assertThat(mockFollowUser.getFollowed(), is("Rodrigo"));
@@ -71,11 +79,11 @@ public class ProcessorShould {
     }
   }
 
-  private class MockGetWall extends GetWallTimeline {
+  private class MockReadWall extends ReadWallTimeline {
 
     private String userName;
 
-    MockGetWall() {
+    MockReadWall() {
       super(null, null);
     }
 

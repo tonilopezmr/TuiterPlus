@@ -28,9 +28,9 @@ public class GetPostsShould {
   public void
   return_posts_when_the_command_is_a_user(){
     PostRepository postRepository = getToniPosts();
-    GetPosts getPosts = new GetPosts(postRepository);
+    ReadUserTimeline readUserTimeline = new ReadUserTimeline(postRepository);
 
-    List<Post> posts = getPosts.getIt("Toni");
+    List<Post> posts = readUserTimeline.getIt("Toni");
 
     assertTrue(!posts.isEmpty());
     assertThat(posts.get(0).getPost(), is("Hello Codurance!"));

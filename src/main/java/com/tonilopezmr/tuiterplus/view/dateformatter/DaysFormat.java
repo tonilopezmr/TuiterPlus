@@ -5,10 +5,6 @@ import java.time.temporal.ChronoUnit;
 
 public class DaysFormat extends DateFormat {
 
-  public DaysFormat(String seconds) {
-    super(ChronoUnit.DAYS.getDuration().getSeconds(), seconds);
-  }
-
   public DaysFormat(String singular, String plural) {
     super(ChronoUnit.DAYS.getDuration().getSeconds(), singular, plural);
   }

@@ -23,12 +23,6 @@ public abstract class DateFormat implements Comparable<DateFormat> {
   private String singular;
   private String plural;
 
-  public DateFormat(long dateInSeconds, String format) {
-    this.dateInSeconds = dateInSeconds;
-    this.singular = format;
-    this.plural = format;
-  }
-
   public DateFormat(long dateInSeconds, String singular, String plural) {
     this.dateInSeconds = dateInSeconds;
     this.singular = singular;

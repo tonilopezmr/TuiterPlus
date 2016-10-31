@@ -2,14 +2,19 @@ package com.tonilopezmr.tuiterplus;
 
 import com.tonilopezmr.tuiterplus.controller.CommandLine;
 import com.tonilopezmr.tuiterplus.controller.Processor;
+import com.tonilopezmr.tuiterplus.controller.commands.Command;
+import com.tonilopezmr.tuiterplus.controller.commands.FollowCommand;
+import com.tonilopezmr.tuiterplus.controller.commands.PostCommand;
+import com.tonilopezmr.tuiterplus.controller.commands.ReadTimelineCommand;
+import com.tonilopezmr.tuiterplus.controller.commands.WallCommand;
 import com.tonilopezmr.tuiterplus.model.post.PostRepository;
 import com.tonilopezmr.tuiterplus.model.user.UserRepository;
 import com.tonilopezmr.tuiterplus.repository.InMemoryPosts;
 import com.tonilopezmr.tuiterplus.repository.InMemoryUsers;
 import com.tonilopezmr.tuiterplus.usercases.CreatePost;
 import com.tonilopezmr.tuiterplus.usercases.FollowUser;
-import com.tonilopezmr.tuiterplus.usercases.GetPosts;
-import com.tonilopezmr.tuiterplus.usercases.GetWallTimeline;
+import com.tonilopezmr.tuiterplus.usercases.ReadUserTimeline;
+import com.tonilopezmr.tuiterplus.usercases.ReadWallTimeline;
 import com.tonilopezmr.tuiterplus.view.ConsoleCLI;
 import com.tonilopezmr.tuiterplus.view.View;
 import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
@@ -17,8 +22,13 @@ import com.tonilopezmr.tuiterplus.view.dateformatter.DaysFormat;
 import com.tonilopezmr.tuiterplus.view.dateformatter.HourFormat;
 import com.tonilopezmr.tuiterplus.view.dateformatter.MinutesFormat;
 import com.tonilopezmr.tuiterplus.view.dateformatter.SecondsFormat;
+import com.tonilopezmr.tuiterplus.view.printer.EmptyPrinter;
+import com.tonilopezmr.tuiterplus.view.printer.PostsPrinter;
+import com.tonilopezmr.tuiterplus.view.printer.WallTimelinePrinter;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -77,20 +87,29 @@ public class ServiceLocator {
     return new CreatePost(getUserRepository(), getPostRepository());
   }
 
-  public GetPosts getPostsUseCase() {
-    return new GetPosts(getPostRepository());
+  public ReadUserTimeline getPostsUseCase() {
+    return new ReadUserTimeline(getPostRepository());
   }
 
-  public GetWallTimeline getWallTimeline() {
-    return new GetWallTimeline(getUserRepository(), getPostRepository());
+  public ReadWallTimeline getWallTimelineUseCase() {
+    return new ReadWallTimeline(getUserRepository(), getPostRepository());
   }
 
-  public FollowUser getFollowUser() {
+  public FollowUser getFollowUserUseCase() {
     return new FollowUser(getUserRepository());
   }
 
+  public List<Command> getCommands() {
+    ArrayList<Command> commands = new ArrayList<>();
+    commands.add(new PostCommand(Processor.POST_COMMAND, new EmptyPrinter(), getCreatePostUseCase()));
+    commands.add(new FollowCommand(Processor.FOLLOW_COMMAND, new EmptyPrinter(), getFollowUserUseCase()));
+    commands.add(new WallCommand(Processor.WALL_COMMAND, new WallTimelinePrinter(), getWallTimelineUseCase()));
+    commands.add(new ReadTimelineCommand(Processor.READ_COMMAND, new PostsPrinter(), getPostsUseCase()));
+    return commands;
+  }
+
   public Processor getProcessor() {
-    return new Processor(getPostsUseCase(), getCreatePostUseCase(), getWallTimeline(), getFollowUser());
+    return new Processor(getCommands());
   }
 
   public CommandLine getCommandLine() {
@@ -100,4 +119,5 @@ public class ServiceLocator {
   public TuiterPlus getTuiterPlus() {
     return new TuiterPlus(getCommandLine());
   }
+
 }

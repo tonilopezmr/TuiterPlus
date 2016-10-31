@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class GetWallTimeline {
+public class ReadWallTimeline {
 
   private PostRepository postRepository;
   private UserRepository userRepository;
 
-  public GetWallTimeline(UserRepository userRepository, PostRepository postRepository) {
+  public ReadWallTimeline(UserRepository userRepository, PostRepository postRepository) {
     this.userRepository = userRepository;
     this.postRepository = postRepository;
   }

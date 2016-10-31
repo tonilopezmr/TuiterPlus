@@ -1,5 +1,6 @@
 package com.tonilopezmr.tuiterplus;
 
+import com.tonilopezmr.tuiterplus.controller.Processor;
 import com.tonilopezmr.tuiterplus.model.post.Post;
 import com.tonilopezmr.tuiterplus.model.user.User;
 import org.junit.Test;
@@ -54,7 +55,7 @@ public class TuiterPlusShould {
   public void
   exit_when_command_is_exit() {
     ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
-        .scanner(willTypeLine("exit"))              //simulate input actions
+        .scanner(willTypeLine(Processor.EXIT_COMMAND))              //simulate input actions
         .printStream(recordOutPut())
         .build();
 
@@ -67,7 +68,7 @@ public class TuiterPlusShould {
 
   @Test
   public void
-  show_posts_when_read_user_timeline_after_post() {
+  show_user_posts_after_create_his_posts() {
     String commands = "Toni -> Hello Codurance!\n";
     commands += "SomeBody\n";
     commands += "Toni -> Cat Cat\n";
@@ -90,7 +91,7 @@ public class TuiterPlusShould {
 
   @Test
   public void
-  show_post_when_get_wall_timeline() {
+  user_follows_another_user_after_create_their_posts() {
     String commands = "Toni -> Hello Codurance!\n";
     commands += "Alvaro -> Hello Toni\n";
     commands += "Toni follows Alvaro\n";

@@ -7,11 +7,11 @@ import com.tonilopezmr.tuiterplus.model.user.User;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GetPosts {
+public class ReadUserTimeline {
 
   private PostRepository postRepository;
 
-  public GetPosts(PostRepository postRepository) {
+  public ReadUserTimeline(PostRepository postRepository) {
     this.postRepository = postRepository;
   }
 

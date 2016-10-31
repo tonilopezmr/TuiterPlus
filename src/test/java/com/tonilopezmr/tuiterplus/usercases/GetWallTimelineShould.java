@@ -39,21 +39,21 @@ public class GetWallTimelineShould {
     return posts;
   }
 
-  private GetWallTimeline getToniFollowsAlvaroAndRodrigoWall() {
+  private ReadWallTimeline getToniFollowsAlvaroAndRodrigoWall() {
     User toni = new User("Toni");
     User alvaro = new User("Alvaro");
     User rodrigo = new User("Rodrigo");
     InMemoryUsers users = getUsers(toni, alvaro, rodrigo);
     InMemoryPosts posts = getPosts(toni, alvaro, rodrigo);
-    return new GetWallTimeline(users, posts);
+    return new ReadWallTimeline(users, posts);
   }
 
   @Test
   public void
   get_wall_timeline_with_friends() {
-    GetWallTimeline getWallTimeline = getToniFollowsAlvaroAndRodrigoWall();
+    ReadWallTimeline readWallTimeline = getToniFollowsAlvaroAndRodrigoWall();
 
-    List<Post> timeline = getWallTimeline.getIt("Toni");
+    List<Post> timeline = readWallTimeline.getIt("Toni");
 
     assertTrue(!timeline.isEmpty());
     assertThat(timeline.get(0).getPost(), is(RODRIGO_ANSWERS_TONI_AND_DO_A_BIT_OF_ADVERTISING));

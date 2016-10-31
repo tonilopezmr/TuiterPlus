@@ -1,9 +1,7 @@
 package com.tonilopezmr.tuiterplus.controller;
 
-import com.tonilopezmr.tuiterplus.model.post.Post;
+import com.tonilopezmr.tuiterplus.view.Printer;
 import com.tonilopezmr.tuiterplus.view.View;
-
-import java.util.List;
 
 /**
  * This is a CommandLine controller, It is responsible to manage the flow of commands to the view.
@@ -27,14 +25,14 @@ public class CommandLine {
   }
 
   private void process(String cmd) {
-    if (cmd.equals("exit")) {
+    if (processor.exit(cmd)) {
       view.showFareWell();
       exit = true;
       return;
     }
 
-    List<Post> timeline = processor.process(cmd);
-    view.show(timeline);
+    Printer printer = processor.process(cmd);
+    printer.print();
   }
 
   public boolean isExit() {
