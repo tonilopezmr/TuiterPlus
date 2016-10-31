@@ -5,17 +5,16 @@ import java.time.Duration;
 /**
  * DateFormat is a class to format DateTime to String,
  * sometimes in some cases needs plural singular differentiate.
- *
+ * <p>
  * For example:
- *      - plural: 46 seconds
- *      - singular: 1 second (or a second)
- *
- *      - plural: 2 days
- *      - singular: yesterday
- *
+ * - plural: 46 seconds
+ * - singular: 1 second (or a second)
+ * <p>
+ * - plural: 2 days
+ * - singular: yesterday
+ * <p>
  * <b>Long dateInSeconds</b> is important because DateFormat needs a order by Time in 1 second,
  * to start with the largest time.
- *
  */
 public abstract class DateFormat implements Comparable<DateFormat> {
 
@@ -30,14 +29,14 @@ public abstract class DateFormat implements Comparable<DateFormat> {
   }
 
   public String singlePlural(int count, String singular, String plural) {
-    return count==1 ? singular : plural;
+    return count == 1 ? singular : plural;
   }
 
   String format(long duration) {
     duration = Math.abs(duration);
     String output = singlePlural((int) duration, singular, plural);
 
-    return duration > 0? String.format(output, duration) : "";
+    return duration > 0 ? String.format(output, duration) : "";
   }
 
   @Override

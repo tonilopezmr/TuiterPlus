@@ -7,9 +7,8 @@ import java.util.Optional;
 
 /**
  * DateFormatter is a class to format Duration to String with a collection of DateFormat to choose one.
- *
+ * <p>
  * It is easy to add news DateFormat.
- *
  */
 public class DateFormatter {
 
@@ -25,7 +24,7 @@ public class DateFormatter {
 
   /**
    * Format Duration to String depends on the DateFormat objects.
-   *
+   * <p>
    * * Filter by results with String length > 0 (has result)
    *
    * @param duration

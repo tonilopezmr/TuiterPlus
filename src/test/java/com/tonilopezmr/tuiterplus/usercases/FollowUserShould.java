@@ -24,7 +24,7 @@ public class FollowUserShould {
 
   @Test
   public void
-  user_follow_another_user(){
+  user_follow_another_user() {
     UserRepository users = getToniRodrigoUsers();
     FollowUser followUser = new FollowUser(users);
 

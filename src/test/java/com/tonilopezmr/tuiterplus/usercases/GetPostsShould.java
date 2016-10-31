@@ -26,7 +26,7 @@ public class GetPostsShould {
 
   @Test
   public void
-  return_posts_when_the_command_is_a_user(){
+  return_posts_when_the_command_is_a_user() {
     PostRepository postRepository = getToniPosts();
     ReadUserTimeline readUserTimeline = new ReadUserTimeline(postRepository);
 

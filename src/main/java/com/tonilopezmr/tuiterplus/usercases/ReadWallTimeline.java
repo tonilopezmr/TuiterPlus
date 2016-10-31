@@ -23,7 +23,7 @@ public class ReadWallTimeline {
     Timeline timeline = new Timeline();
     Optional<User> oUser = userRepository.get(userName);
 
-    if (oUser.isPresent()){
+    if (oUser.isPresent()) {
       User user = oUser.get();
       timeline.addAll(postRepository.getPostsBy(user));
       for (User friend : user.getFollowing()) {

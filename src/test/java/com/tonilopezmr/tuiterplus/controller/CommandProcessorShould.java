@@ -32,8 +32,9 @@ public class CommandProcessorShould {
     assertThat(mockCreatePost.getPostArg(), is("Hello Codurance!"));
   }
 
-  @Test public void
-  get_user_argument_when_get_wall(){
+  @Test
+  public void
+  get_user_argument_when_get_wall() {
     MockReadWall mockGetWall = new MockReadWall();
     MyCustomPrinter customPrinter = new MyCustomPrinter();
     WallCommand wallCommand = new WallCommand(CommandProcessor.WALL_COMMAND, customPrinter, mockGetWall);
@@ -58,8 +59,9 @@ public class CommandProcessorShould {
     assertThat(mockFollowUser.getFollowed(), is("Rodrigo"));
   }
 
-  @Test public void
-  return_a_expected_printer_when_follows(){
+  @Test
+  public void
+  return_a_expected_printer_when_follows() {
     MockFollowUser mockFollowUser = new MockFollowUser();
     MyCustomPrinter customPrinter = new MyCustomPrinter();
     FollowCommand followCommand = new FollowCommand(CommandProcessor.FOLLOW_COMMAND, customPrinter, mockFollowUser);
@@ -70,8 +72,9 @@ public class CommandProcessorShould {
     assertThat(printer, instanceOf(MyCustomPrinter.class));
   }
 
-  @Test public void
-  return_a_expected_output_when_read_wall_timeline(){
+  @Test
+  public void
+  return_a_expected_output_when_read_wall_timeline() {
     MockReadWall mockGetWall = new MockReadWall();
     MyCustomPrinter customPrinter = new MyCustomPrinter();
     WallCommand wallCommand = new WallCommand(CommandProcessor.WALL_COMMAND, customPrinter, mockGetWall);

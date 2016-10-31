@@ -21,11 +21,11 @@ public class DateFormatterShould {
 
   @Test
   public void
-  return_difference_in_seconds_when_is_lower_than_a_minute(){
+  return_difference_in_seconds_when_is_lower_than_a_minute() {
     LocalDateTime after = LocalDateTime.now().minusSeconds(30);
     Duration duration = getDuration(after);
 
-    DateFormatter dateFormatter =   getDateFormatter();
+    DateFormatter dateFormatter = getDateFormatter();
     String format = dateFormatter.format(duration);
 
     assertThat(format, is("30 seconds"));
@@ -38,7 +38,7 @@ public class DateFormatterShould {
 
   @Test
   public void
-  return_difference_in_minutes_when_is_lower_than_a_hour(){
+  return_difference_in_minutes_when_is_lower_than_a_hour() {
     LocalDateTime after = LocalDateTime.now().minusMinutes(30);
     Duration duration = getDuration(after);
 
@@ -50,7 +50,7 @@ public class DateFormatterShould {
 
   @Test
   public void
-  return_difference_in_hours_when_is_lower_than_a_day(){
+  return_difference_in_hours_when_is_lower_than_a_day() {
     LocalDateTime after = LocalDateTime.now().minusHours(3);
     Duration duration = getDuration(after);
 
@@ -62,7 +62,7 @@ public class DateFormatterShould {
 
   @Test
   public void
-  return_difference_in_days_when_is_more_than_a_hour(){
+  return_difference_in_days_when_is_more_than_a_hour() {
     LocalDateTime after = LocalDateTime.now().minusDays(30);
     Duration duration = getDuration(after);
 
@@ -72,8 +72,9 @@ public class DateFormatterShould {
     assertThat(format, is("30 days"));
   }
 
-  @Test public void
-  return_difference_in_seconds_format_when_is_singular(){
+  @Test
+  public void
+  return_difference_in_seconds_format_when_is_singular() {
     LocalDateTime after = LocalDateTime.now().minusSeconds(1);
     Duration duration = getDuration(after);
 

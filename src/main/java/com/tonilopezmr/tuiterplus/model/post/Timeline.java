@@ -14,7 +14,7 @@ public class Timeline extends TreeSet<Post> {
   public Post get(int index) {
     Iterator<Post> iterator = iterator();
 
-    for (int i = 0, size = size(); i < size-1 && i < index; i++) {
+    for (int i = 0, size = size(); i < size - 1 && i < index; i++) {
       iterator.next();
     }
 
