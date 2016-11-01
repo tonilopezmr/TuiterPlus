@@ -7,7 +7,6 @@ import com.tonilopezmr.tuiterplus.model.user.UserRepository;
 import com.tonilopezmr.tuiterplus.repository.InMemoryUsers;
 import com.tonilopezmr.tuiterplus.usercases.AddPost;
 import com.tonilopezmr.tuiterplus.usercases.FollowUser;
-import com.tonilopezmr.tuiterplus.usercases.ReadUserTimeline;
 import com.tonilopezmr.tuiterplus.usercases.ReadWallTimeline;
 import com.tonilopezmr.tuiterplus.view.ConsoleCLI;
 import com.tonilopezmr.tuiterplus.view.View;
@@ -61,10 +60,6 @@ public class ServiceLocator {
 
   public AddPost getCreatePostUseCase() {
     return new AddPost(getUserRepository(), getCreationTime());
-  }
-
-  public ReadUserTimeline getPostsUseCase() {
-    return new ReadUserTimeline(getUserRepository());
   }
 
   public ReadWallTimeline getWallTimelineUseCase() {

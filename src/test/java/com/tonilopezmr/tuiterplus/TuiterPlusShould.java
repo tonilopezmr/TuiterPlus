@@ -67,7 +67,7 @@ public class TuiterPlusShould {
   show_user_posts_after_create_his_posts() {
     String commands = "Toni -> Hello Codurance!\n";
     commands += "Toni -> Cat Cat\n";
-    commands += "Toni\n";
+    commands += "Toni wall\n";
     commands += "exit";
 
     ServiceLocator serviceLocator = new MockServiceLocatorBuilder()
@@ -80,9 +80,9 @@ public class TuiterPlusShould {
     tuiterPlus.run();
 
     String output = getOutput(3);
-    assertThat(output, is("Cat Cat (a moment ago)"));
+    assertThat(output, is("Toni - Cat Cat (a moment ago)"));
     output = getOutput(4);
-    assertThat(output, is("Hello Codurance! (a moment ago)"));
+    assertThat(output, is("Toni - Hello Codurance! (a moment ago)"));
   }
 
   @Test
