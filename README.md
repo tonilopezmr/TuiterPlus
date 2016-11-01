@@ -1,6 +1,6 @@
 # TuiterPlus
 
-####Download las release jar and execute: java -cp TuiterPlus.jar com.tonilopezmr.tuiterplus.TuiterPlus.
+####Download las release jar and execute: java -cp TuiterPlus.jar com.tonilopezmr.tuiterplus.TuiterPlus
 
 ####Exercise
 Implement a console-based social networking application (similar to Twitter) satisfying the scenarios below.
