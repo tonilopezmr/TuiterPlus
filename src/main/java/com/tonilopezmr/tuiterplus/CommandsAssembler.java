@@ -31,19 +31,34 @@ public class CommandsAssembler {
 
   public List<Command> assemble() {
     View view = serviceLocator.getView();
-    AddPost createPostUseCase = serviceLocator.getCreatePostUseCase();
-    FollowUser followUserUseCase = serviceLocator.getFollowUserUseCase();
-    ReadWallTimeline wallTimelineUseCase = serviceLocator.getWallTimelineUseCase();
-    ReadUserTimeline postsUseCase = serviceLocator.getPostsUseCase();
-    UnfollowUser unfollow = new UnfollowUser(serviceLocator.getUserRepository());
 
     ArrayList<Command> commands = new ArrayList<>();
-    commands.add(new PostCommand(CommandProcessor.POST_COMMAND, new EmptyPrinter(), createPostUseCase));
-    commands.add(new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new EmptyPrinter(), followUserUseCase));
-    commands.add(new WallCommand(CommandProcessor.WALL_COMMAND, new WallTimelinePrinter(view), wallTimelineUseCase));
-    commands.add(new UnfollowCommand(CommandProcessor.UNFOLLOW_COMMAND, new UnfollowPrinter(view), unfollow));
-    commands.add(new ReadTimelineCommand(CommandProcessor.READ_COMMAND, new TimelinePrinter(view), postsUseCase));
+    commands.add(getPostCommand(serviceLocator.getCreatePostUseCase()));
+    commands.add(getFollowCommand(serviceLocator.getFollowUserUseCase()));
+    commands.add(getUnfollowCommand(view, serviceLocator.getUnfollowUserUseCase()));
+    commands.add(getWallCommand(view, serviceLocator.getWallTimelineUseCase()));
+    commands.add(getReadTimelineCommand(view, serviceLocator.getPostsUseCase()));
     return commands;
+  }
+
+  private ReadTimelineCommand getReadTimelineCommand(View view, ReadUserTimeline postsUseCase) {
+    return new ReadTimelineCommand(CommandProcessor.READ_COMMAND, new TimelinePrinter(view), postsUseCase);
+  }
+
+  private UnfollowCommand getUnfollowCommand(View view, UnfollowUser unfollowUser) {
+    return new UnfollowCommand(CommandProcessor.UNFOLLOW_COMMAND, new UnfollowPrinter(view), unfollowUser);
+  }
+
+  private WallCommand getWallCommand(View view, ReadWallTimeline wallTimelineUseCase) {
+    return new WallCommand(CommandProcessor.WALL_COMMAND, new WallTimelinePrinter(view), wallTimelineUseCase);
+  }
+
+  private FollowCommand getFollowCommand(FollowUser followUserUseCase) {
+    return new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new EmptyPrinter(), followUserUseCase);
+  }
+
+  private PostCommand getPostCommand(AddPost createPostUseCase) {
+    return new PostCommand(CommandProcessor.POST_COMMAND, new EmptyPrinter(), createPostUseCase);
   }
 
 }

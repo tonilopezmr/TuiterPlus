@@ -9,6 +9,7 @@ import com.tonilopezmr.tuiterplus.usercases.AddPost;
 import com.tonilopezmr.tuiterplus.usercases.FollowUser;
 import com.tonilopezmr.tuiterplus.usercases.ReadUserTimeline;
 import com.tonilopezmr.tuiterplus.usercases.ReadWallTimeline;
+import com.tonilopezmr.tuiterplus.usercases.UnfollowUser;
 import com.tonilopezmr.tuiterplus.view.ConsoleCLI;
 import com.tonilopezmr.tuiterplus.view.View;
 
@@ -73,6 +74,10 @@ public class ServiceLocator {
 
   public FollowUser getFollowUserUseCase() {
     return new FollowUser(getUserRepository());
+  }
+
+  public UnfollowUser getUnfollowUserUseCase() {
+    return new UnfollowUser(getUserRepository());
   }
 
   public CommandsAssembler commandsAssembler() {
