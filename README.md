@@ -1,5 +1,6 @@
 # TuiterPlus
-Tuiter+
+
+To run application execute **TuiterPlus** main application.
 
 ####Exercise
 Implement a console-based social networking application (similar to Twitter) satisfying the scenarios below.
