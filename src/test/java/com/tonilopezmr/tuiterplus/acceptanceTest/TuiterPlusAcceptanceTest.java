@@ -58,7 +58,8 @@ public class TuiterPlusAcceptanceTest {
         .printStream(recordOutPut())
         .build();
 
-    TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
+    ServiceLocator.load(serviceLocator);
+    TuiterPlus tuiterPlus = ServiceLocator.get().getTuiterPlus();
     tuiterPlus.run();
 
     String output = getOutput(1);
@@ -79,7 +80,8 @@ public class TuiterPlusAcceptanceTest {
         .creationTimeBeetweenPosts(100)    //see method doc
         .build();
 
-    TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
+    ServiceLocator.load(serviceLocator);
+    TuiterPlus tuiterPlus = ServiceLocator.get().getTuiterPlus();
     tuiterPlus.run();
 
     String output = getOutput(3);
@@ -102,8 +104,9 @@ public class TuiterPlusAcceptanceTest {
         .printStream(recordOutPut())
         .creationTimeBeetweenPosts(100)
         .build();
-    TuiterPlus tuiterPlus = serviceLocator.getTuiterPlus();
 
+    ServiceLocator.load(serviceLocator);
+    TuiterPlus tuiterPlus = ServiceLocator.get().getTuiterPlus();
     tuiterPlus.run();
 
     String output = getOutput(4);
