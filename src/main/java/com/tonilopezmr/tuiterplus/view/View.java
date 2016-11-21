@@ -14,6 +14,8 @@ import java.util.Scanner;
  */
 public class View {
 
+  public static final String POST_TIMELINE_FORMAT = "%s (%s ago)\n";
+  public static final String POST_WALL_TIMELINE_FORMAT = "%s - %s (%s ago)\n";
   private Scanner scanner;
   private PrintStream output;
   private DateFormatter dateFormatter;
@@ -64,7 +66,7 @@ public class View {
       Duration diff = dateFormatter.diff(post.getDateTime());
       String result = dateFormatter.format(diff);
 
-      output.printf("%s (%s ago)\n", post.getPost(), result);
+      output.printf(POST_TIMELINE_FORMAT, post.getPost(), result);
     }
   }
 
@@ -75,7 +77,7 @@ public class View {
       String result = dateFormatter.format(diff);
 
       User user = post.getUser();
-      output.printf("%s - %s (%s ago)\n", user.getName(), post.getPost(), result);
+      output.printf(POST_WALL_TIMELINE_FORMAT, user.getName(), post.getPost(), result);
     }
   }
 
