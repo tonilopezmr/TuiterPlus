@@ -1,5 +1,8 @@
-package com.tonilopezmr.tuiterplus;
+package com.tonilopezmr.tuiterplus.acceptanceTest;
 
+import com.tonilopezmr.tuiterplus.MockServiceLocatorBuilder;
+import com.tonilopezmr.tuiterplus.ServiceLocator;
+import com.tonilopezmr.tuiterplus.TuiterPlus;
 import com.tonilopezmr.tuiterplus.controller.CommandProcessor;
 import org.junit.Test;
 
@@ -10,7 +13,7 @@ import java.util.Scanner;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TuiterPlusShould {
+public class TuiterPlusAcceptanceTest {
 
   private ByteArrayOutputStream out = new ByteArrayOutputStream();
 
