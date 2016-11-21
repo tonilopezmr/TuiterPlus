@@ -1,18 +1,18 @@
 package com.tonilopezmr.tuiterplus;
 
-import com.tonilopezmr.tuiterplus.controller.CommandProcessor;
-import com.tonilopezmr.tuiterplus.controller.commands.Command;
-import com.tonilopezmr.tuiterplus.controller.commands.FollowCommand;
-import com.tonilopezmr.tuiterplus.controller.commands.PostCommand;
-import com.tonilopezmr.tuiterplus.controller.commands.ReadTimelineCommand;
-import com.tonilopezmr.tuiterplus.controller.commands.WallCommand;
-import com.tonilopezmr.tuiterplus.controller.printer.EmptyPrinter;
-import com.tonilopezmr.tuiterplus.controller.printer.TimelinePrinter;
-import com.tonilopezmr.tuiterplus.controller.printer.WallTimelinePrinter;
-import com.tonilopezmr.tuiterplus.usercases.AddPost;
-import com.tonilopezmr.tuiterplus.usercases.FollowUser;
-import com.tonilopezmr.tuiterplus.usercases.ReadUserTimeline;
-import com.tonilopezmr.tuiterplus.usercases.ReadWallTimeline;
+import com.tonilopezmr.tuiterplus.cmdcontroller.CommandProcessor;
+import com.tonilopezmr.tuiterplus.cmdcontroller.commands.Command;
+import com.tonilopezmr.tuiterplus.cmdcontroller.commands.FollowCommand;
+import com.tonilopezmr.tuiterplus.cmdcontroller.commands.PostCommand;
+import com.tonilopezmr.tuiterplus.cmdcontroller.commands.ReadTimelineCommand;
+import com.tonilopezmr.tuiterplus.cmdcontroller.commands.WallCommand;
+import com.tonilopezmr.tuiterplus.cmdcontroller.printer.EmptyPrinter;
+import com.tonilopezmr.tuiterplus.cmdcontroller.printer.TimelinePrinter;
+import com.tonilopezmr.tuiterplus.cmdcontroller.printer.WallTimelinePrinter;
+import com.tonilopezmr.tuiterplus.timeline.usercases.AddPost;
+import com.tonilopezmr.tuiterplus.user.usercases.FollowUser;
+import com.tonilopezmr.tuiterplus.timeline.usercases.ReadUserTimeline;
+import com.tonilopezmr.tuiterplus.timeline.usercases.ReadWallTimeline;
 import com.tonilopezmr.tuiterplus.view.View;
 
 import java.util.ArrayList;

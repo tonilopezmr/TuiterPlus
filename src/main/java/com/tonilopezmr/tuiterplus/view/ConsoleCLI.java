@@ -1,8 +1,8 @@
 package com.tonilopezmr.tuiterplus.view;
 
-import com.tonilopezmr.tuiterplus.model.post.Post;
-import com.tonilopezmr.tuiterplus.model.post.Timeline;
-import com.tonilopezmr.tuiterplus.model.user.User;
+import com.tonilopezmr.tuiterplus.timeline.model.Post;
+import com.tonilopezmr.tuiterplus.timeline.model.Timeline;
+import com.tonilopezmr.tuiterplus.user.model.User;
 import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
 
 import java.io.PrintStream;
@@ -38,7 +38,7 @@ public class ConsoleCLI implements View {
     show("******** Tuiter+ tonilopezmr ********\n");
     show("*************************************\n\n");
 
-    show("IMPORTANT: Users are created as they post their first post\n\n");
+    show("IMPORTANT: Users are created as they timeline their first timeline\n\n");
     show("How to use (before ':' are not part of the commands)\n\n");
     show("\tto posting: <user name> -> <message>\n");
     show("\tto reading: <user name>\n");

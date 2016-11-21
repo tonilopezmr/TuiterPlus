@@ -1,6 +1,6 @@
 package com.tonilopezmr.tuiterplus;
 
-import com.tonilopezmr.tuiterplus.model.TimeProvider;
+import com.tonilopezmr.tuiterplus.base.TimeProvider;
 import com.tonilopezmr.tuiterplus.view.dateformatter.DateFormatter;
 import com.tonilopezmr.tuiterplus.view.dateformatter.formats.DaysFormat;
 import com.tonilopezmr.tuiterplus.view.dateformatter.formats.HourFormat;
