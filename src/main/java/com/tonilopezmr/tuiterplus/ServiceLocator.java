@@ -76,7 +76,7 @@ public class ServiceLocator {
   }
 
   public CommandsAssembler commandsAssembler() {
-    return new CommandsAssembler(this);
+    return new CommandsAssembler(injector);
   }
 
   public CommandProcessor getProcessor() {

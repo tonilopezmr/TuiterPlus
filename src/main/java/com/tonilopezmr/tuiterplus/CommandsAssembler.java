@@ -42,19 +42,31 @@ public class CommandsAssembler {
   }
 
   private ReadTimelineCommand getReadTimelineCommand(View view, ReadUserTimeline postsUseCase) {
-    return new ReadTimelineCommand(CommandProcessor.READ_COMMAND, new TimelinePrinter(view), postsUseCase);
+    return new ReadTimelineCommand(CommandProcessor.READ_COMMAND, getTimelinePrinter(view), postsUseCase);
   }
 
   private WallCommand getWallCommand(View view, ReadWallTimeline wallTimelineUseCase) {
-    return new WallCommand(CommandProcessor.WALL_COMMAND, new WallTimelinePrinter(view), wallTimelineUseCase);
+    return new WallCommand(CommandProcessor.WALL_COMMAND, getWallTimePrinter(view), wallTimelineUseCase);
   }
 
   private FollowCommand getFollowCommand(FollowUser followUserUseCase) {
-    return new FollowCommand(CommandProcessor.FOLLOW_COMMAND, new EmptyPrinter(), followUserUseCase);
+    return new FollowCommand(CommandProcessor.FOLLOW_COMMAND, getEmptyPrinter(), followUserUseCase);
   }
 
   private PostCommand getPostCommand(AddPost createPostUseCase) {
-    return new PostCommand(CommandProcessor.POST_COMMAND, new EmptyPrinter(), createPostUseCase);
+    return new PostCommand(CommandProcessor.POST_COMMAND, getEmptyPrinter(), createPostUseCase);
+  }
+
+  private TimelinePrinter getTimelinePrinter(View view) {
+    return new TimelinePrinter(view);
+  }
+
+  private WallTimelinePrinter getWallTimePrinter(View view) {
+    return new WallTimelinePrinter(view);
+  }
+
+  private EmptyPrinter getEmptyPrinter() {
+    return new EmptyPrinter();
   }
 
 }
