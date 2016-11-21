@@ -1,6 +1,6 @@
 package com.tonilopezmr.tuiterplus;
 
-import com.tonilopezmr.tuiterplus.model.TimeProvider;
+import com.tonilopezmr.tuiterplus.base.TimeProvider;
 
 import java.io.PrintStream;
 import java.time.LocalDateTime;
@@ -28,9 +28,9 @@ public class MockServiceLocatorBuilder {
   }
 
   /**
-   * To have a control of the post creation time.
+   * To have a control of the timeline creation time.
    *
-   * When have a two post creations at the same time could fail because the test has created two post at the same time,
+   * When have a two timeline creations at the same time could fail because the test has created two timeline at the same time,
    * and the sort of posts could be not correct.
    *
    * @param millis

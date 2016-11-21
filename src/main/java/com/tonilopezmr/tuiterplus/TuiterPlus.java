@@ -1,6 +1,6 @@
 package com.tonilopezmr.tuiterplus;
 
-import com.tonilopezmr.tuiterplus.controller.CommandLine;
+import com.tonilopezmr.tuiterplus.cmdcontroller.CommandLine;
 
 /**
  * Application Class, start the CommandLine application.

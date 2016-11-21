@@ -1,7 +1,7 @@
 package com.tonilopezmr.tuiterplus.view.dateformatter;
 
 import com.tonilopezmr.tuiterplus.DataFormatterAssembler;
-import com.tonilopezmr.tuiterplus.model.TimeProvider;
+import com.tonilopezmr.tuiterplus.base.TimeProvider;
 import org.junit.Test;
 
 import java.time.Duration;

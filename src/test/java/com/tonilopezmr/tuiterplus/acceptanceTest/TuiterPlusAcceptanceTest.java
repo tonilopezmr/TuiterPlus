@@ -3,7 +3,7 @@ package com.tonilopezmr.tuiterplus.acceptanceTest;
 import com.tonilopezmr.tuiterplus.MockServiceLocatorBuilder;
 import com.tonilopezmr.tuiterplus.ServiceLocator;
 import com.tonilopezmr.tuiterplus.TuiterPlus;
-import com.tonilopezmr.tuiterplus.controller.CommandProcessor;
+import com.tonilopezmr.tuiterplus.cmdcontroller.CommandProcessor;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;

@@ -1,6 +1,6 @@
 package com.tonilopezmr.tuiterplus.view;
 
-import com.tonilopezmr.tuiterplus.model.post.Timeline;
+import com.tonilopezmr.tuiterplus.timeline.model.Timeline;
 
 /**
  * What my view can do

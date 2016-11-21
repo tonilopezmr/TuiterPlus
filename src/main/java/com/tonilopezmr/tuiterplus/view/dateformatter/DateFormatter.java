@@ -1,6 +1,6 @@
 package com.tonilopezmr.tuiterplus.view.dateformatter;
 
-import com.tonilopezmr.tuiterplus.model.TimeProvider;
+import com.tonilopezmr.tuiterplus.base.TimeProvider;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
