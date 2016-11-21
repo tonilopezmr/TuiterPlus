@@ -1,15 +1,14 @@
 package com.tonilopezmr.tuiterplus;
 
+import com.tonilopezmr.tuiterplus.base.TimeProvider;
 import com.tonilopezmr.tuiterplus.cmdcontroller.CommandLine;
 import com.tonilopezmr.tuiterplus.cmdcontroller.CommandProcessor;
-import com.tonilopezmr.tuiterplus.base.TimeProvider;
-import com.tonilopezmr.tuiterplus.user.model.UserRepository;
-import com.tonilopezmr.tuiterplus.user.InMemoryUsers;
 import com.tonilopezmr.tuiterplus.timeline.usercases.AddPost;
-import com.tonilopezmr.tuiterplus.user.usercases.FollowUser;
 import com.tonilopezmr.tuiterplus.timeline.usercases.ReadUserTimeline;
 import com.tonilopezmr.tuiterplus.timeline.usercases.ReadWallTimeline;
-import com.tonilopezmr.tuiterplus.view.ConsoleCLI;
+import com.tonilopezmr.tuiterplus.user.InMemoryUsers;
+import com.tonilopezmr.tuiterplus.user.model.UserRepository;
+import com.tonilopezmr.tuiterplus.user.usercases.FollowUser;
 import com.tonilopezmr.tuiterplus.view.View;
 
 import java.io.PrintStream;
@@ -50,7 +49,7 @@ public class ServiceLocator {
   }
 
   public View getView() {
-    return new ConsoleCLI(getScanner(), getPrintStream(), getDataFormatterAssembler().assemble());
+    return new View(getScanner(), getPrintStream(), getDataFormatterAssembler().assemble());
   }
 
   public UserRepository getUserRepository() {

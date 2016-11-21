@@ -10,9 +10,9 @@ import com.tonilopezmr.tuiterplus.cmdcontroller.printer.EmptyPrinter;
 import com.tonilopezmr.tuiterplus.cmdcontroller.printer.TimelinePrinter;
 import com.tonilopezmr.tuiterplus.cmdcontroller.printer.WallTimelinePrinter;
 import com.tonilopezmr.tuiterplus.timeline.usercases.AddPost;
-import com.tonilopezmr.tuiterplus.user.usercases.FollowUser;
 import com.tonilopezmr.tuiterplus.timeline.usercases.ReadUserTimeline;
 import com.tonilopezmr.tuiterplus.timeline.usercases.ReadWallTimeline;
+import com.tonilopezmr.tuiterplus.user.usercases.FollowUser;
 import com.tonilopezmr.tuiterplus.view.View;
 
 import java.util.ArrayList;
