@@ -6,9 +6,6 @@ import com.tonilopezmr.tuiterplus.cmdcontroller.commands.FollowCommand;
 import com.tonilopezmr.tuiterplus.cmdcontroller.commands.PostCommand;
 import com.tonilopezmr.tuiterplus.cmdcontroller.commands.ReadTimelineCommand;
 import com.tonilopezmr.tuiterplus.cmdcontroller.commands.WallCommand;
-import com.tonilopezmr.tuiterplus.cmdcontroller.printer.EmptyPrinter;
-import com.tonilopezmr.tuiterplus.cmdcontroller.printer.TimelinePrinter;
-import com.tonilopezmr.tuiterplus.cmdcontroller.printer.WallTimelinePrinter;
 import com.tonilopezmr.tuiterplus.timeline.usercases.AddPost;
 import com.tonilopezmr.tuiterplus.timeline.usercases.ReadUserTimeline;
 import com.tonilopezmr.tuiterplus.timeline.usercases.ReadWallTimeline;
@@ -42,31 +39,19 @@ public class CommandsAssembler {
   }
 
   private ReadTimelineCommand getReadTimelineCommand(View view, ReadUserTimeline postsUseCase) {
-    return new ReadTimelineCommand(CommandProcessor.READ_COMMAND, getTimelinePrinter(view), postsUseCase);
+    return new ReadTimelineCommand(CommandProcessor.READ_COMMAND, view, postsUseCase);
   }
 
   private WallCommand getWallCommand(View view, ReadWallTimeline wallTimelineUseCase) {
-    return new WallCommand(CommandProcessor.WALL_COMMAND, getWallTimePrinter(view), wallTimelineUseCase);
+    return new WallCommand(CommandProcessor.WALL_COMMAND, view, wallTimelineUseCase);
   }
 
   private FollowCommand getFollowCommand(FollowUser followUserUseCase) {
-    return new FollowCommand(CommandProcessor.FOLLOW_COMMAND, getEmptyPrinter(), followUserUseCase);
+    return new FollowCommand(CommandProcessor.FOLLOW_COMMAND, followUserUseCase);
   }
 
   private PostCommand getPostCommand(AddPost createPostUseCase) {
-    return new PostCommand(CommandProcessor.POST_COMMAND, getEmptyPrinter(), createPostUseCase);
-  }
-
-  private TimelinePrinter getTimelinePrinter(View view) {
-    return new TimelinePrinter(view);
-  }
-
-  private WallTimelinePrinter getWallTimePrinter(View view) {
-    return new WallTimelinePrinter(view);
-  }
-
-  private EmptyPrinter getEmptyPrinter() {
-    return new EmptyPrinter();
+    return new PostCommand(CommandProcessor.POST_COMMAND, createPostUseCase);
   }
 
 }

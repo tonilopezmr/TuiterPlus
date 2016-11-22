@@ -2,26 +2,25 @@ package com.tonilopezmr.tuiterplus.cmdcontroller.commands;
 
 import com.tonilopezmr.tuiterplus.timeline.model.Timeline;
 import com.tonilopezmr.tuiterplus.timeline.usercases.ReadUserTimeline;
-import com.tonilopezmr.tuiterplus.cmdcontroller.printer.Printer;
+import com.tonilopezmr.tuiterplus.view.View;
 
 import java.util.regex.Matcher;
 
 public class ReadTimelineCommand extends Command {
 
-  private Printer<Timeline> printer;
+  private View view;
   private ReadUserTimeline readUserTimeline;
 
-  public ReadTimelineCommand(String pattern, Printer<Timeline> printer, ReadUserTimeline readUserTimeline) {
+  public ReadTimelineCommand(String pattern, View view, ReadUserTimeline readUserTimeline) {
     super(pattern);
-    this.printer = printer;
+    this.view = view;
     this.readUserTimeline = readUserTimeline;
   }
 
   @Override
-  public Printer process() {
+  public void process() {
     Matcher matcher = getMatcher();
     Timeline timeline = readUserTimeline.getIt(matcher.group(1));
-    printer.load(timeline);
-    return printer;
+    view.show(timeline);
   }
 }

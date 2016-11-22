@@ -70,7 +70,7 @@ public class View {
     }
   }
 
-  public void showWallTimeline(Timeline posts) {
+  public void showWall(Timeline posts) {
     for (Post post : posts) {
 
       Duration diff = dateFormatter.diff(post.getDateTime());

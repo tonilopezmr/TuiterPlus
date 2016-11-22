@@ -1,6 +1,5 @@
 package com.tonilopezmr.tuiterplus.cmdcontroller;
 
-import com.tonilopezmr.tuiterplus.cmdcontroller.printer.Printer;
 import com.tonilopezmr.tuiterplus.view.View;
 
 /**
@@ -35,8 +34,7 @@ public class CommandLine {
       return;
     }
 
-    Printer printer = processor.process(cmd);
-    printer.print();
+    processor.process(cmd);
   }
 
   public boolean isExit() {

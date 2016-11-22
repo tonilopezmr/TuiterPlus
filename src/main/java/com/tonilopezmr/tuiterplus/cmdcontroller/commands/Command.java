@@ -1,7 +1,5 @@
 package com.tonilopezmr.tuiterplus.cmdcontroller.commands;
 
-import com.tonilopezmr.tuiterplus.cmdcontroller.printer.Printer;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,5 +24,5 @@ public abstract class Command {
     return matcher.matches();
   }
 
-  public abstract Printer process();
+  public abstract void process();
 }

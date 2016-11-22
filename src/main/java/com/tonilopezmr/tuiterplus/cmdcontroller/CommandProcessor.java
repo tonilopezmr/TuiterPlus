@@ -1,9 +1,9 @@
 package com.tonilopezmr.tuiterplus.cmdcontroller;
 
 import com.tonilopezmr.tuiterplus.cmdcontroller.commands.Command;
-import com.tonilopezmr.tuiterplus.cmdcontroller.printer.Printer;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Process the commands and return a printable output.
@@ -26,12 +26,15 @@ public class CommandProcessor {
     this.commands = commands;
   }
 
-  public Printer process(String cmd) {
-
-    return commands.stream()
+  public void process(String cmd) {
+    Optional<Command> cmdOpt = commands.stream()
         .filter(it -> it.matches(cmd))
-        .map(Command::process)
-        .findFirst().get();
+        .findFirst();
+
+    if (cmdOpt.isPresent()) {
+      Command command = cmdOpt.get();
+      command.process();
+    }
   }
 
   /**
